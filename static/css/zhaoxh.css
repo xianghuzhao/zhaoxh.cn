@@ -25,3 +25,7 @@ p.post-license {
   font-size: 0.8rem;
   opacity: 0.8;
 }
+
+.comment-hidden {
+  display: none;
+}

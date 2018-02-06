@@ -12,7 +12,17 @@ draft: false
 继续
 
 解放路卡就方式垃圾发积分咖啡就的撒龙卷风但是发，附近阿斯顿附近啊发积分的啊，
-积分垃圾发啊积分啊积分的啦手机费的啊积分jdalk。
+积分垃圾发啊积分啊积分的啦手机费的啊积分`jdalk`积分的离开撒。
+
+```c++
+// This is comment
+#include <iostream>
+
+int main() {
+  std::cout << "Hello World!" << std::endl;
+  return 0;
+}
+```
 
 解放路卡就方式垃圾发积分咖啡就的撒龙卷风但是发，附近阿斯顿附近啊发积分的啊，
 积分垃圾发啊积分啊积分的啦手机费的啊积分jdalk。

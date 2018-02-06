@@ -28,7 +28,7 @@
         <strong>{{ i18n "permalink" }} : </strong>
         <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Permalink }}</a>
       </p>
-      {{ if isset .Params "licensed" }}
+      {{ if .Params.licensed }}
       <p class="post-license">
         {{ if eq .Lang "zh" }}
           <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />本作品采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议 (CC BY-NC 4.0)</a> 进行许可。转载请注明出处。
@@ -38,8 +38,14 @@
       </p>
       {{ end }}
     </footer>
+
     {{ if ne .Params.comments false }}
       {{ if .Site.Params.changyan }}
+      {{ if eq .Lang "zh" }}
+      <div id="comment-changyan">
+      {{ else }}
+      <div id="comment-changyan" class='comment-hidden'>
+      {{ end }}
       <div id="cyReward" role="cylabs" data-use="reward"></div>
       <script src="//changyan.itc.cn/js/lib/jquery.js"></script>
       <script src="//changyan.sohu.com/js/changyan.labs.https.js?appid={{ .Site.Params.changyanId }}"></script>
@@ -51,8 +57,18 @@
       var width = window.innerWidth || document.documentElement.clientWidth;
       if (width < 960) {
       window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
-      {{ else if .Site.DisqusShortname }}{{ template "_internal/disqus.html" . }}
-      {{ else }}{{ end }}
+      </div>
+      {{ end }}
+
+      {{ if .Site.DisqusShortname }}
+      {{ if eq .Lang "zh" }}
+      <div id="comment-disqus" class='comment-hidden'>
+      {{ else }}
+      <div id="comment-disqus">
+      {{ end }}
+      {{ template "_internal/disqus.html" . }}
+      </div>
+      {{ end }}
     {{ end }}
   </section>
   {{ partial "footer.html" . }}

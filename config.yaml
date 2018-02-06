@@ -1,22 +1,20 @@
 baseURL: "https://zhaoxh.cn/"
-languageCode: "zh-cn"
+languageCode: "zh"
 title: "虎泉笔谈"
 theme: "nuo"
 
 enableRobotsTXT: true
 pygmentsCodeFences: true
+#pygmentsStyle: monokai
 canonifyurls: true
 
 hasCJKLanguage: true
 
 # Disqus Username
-# disqusShortname: "disqus_shortname"
+disqusShortname: "zhaoxh"
 
 # Google Analytics UA number
 # googleAnalytics: "UA-XXXXXXXX-X"
-
-# Copyright of your post
-copyright: "© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce."
 
 # Multilingual
 defaultContentLanguage: "zh"
@@ -25,6 +23,7 @@ defaultContentLanguage: "zh"
 languages:
   zh:
     weight: 0
+    languageCode: "zh"
     languageName: "简体中文"
     title: "虎泉笔谈"
 
@@ -58,6 +57,7 @@ languages:
 
   en:
     weight: 1
+    languageCode: "en"
     languageName: "English"
     title: "Xianghu's Blog"
 
