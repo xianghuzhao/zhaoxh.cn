@@ -29,8 +29,8 @@ languages:
 
     params:
       seotitle: "虎泉笔谈"
-      subtitle: "~  ~"
-      description: "记录软件开发心得"
+      subtitle: "~ 见自己，见天地，见众生 ~"
+      description: "软件开发心路历程"
 
     menu:
       main:
@@ -46,10 +46,6 @@ languages:
           weight: 30
           identifier: "tags"
           url: "/tags/"
-        - name: "关于"
-          weight: 40
-          identifier: "about"
-          url: "/about/"
         - name: "English"
           weight: 100
           identifier: "lang"
@@ -63,8 +59,8 @@ languages:
 
     params:
       seotitle: "Xianghu's Blog"
-      subtitle: "~ Haha ~"
-      description: "lala"
+      subtitle: "~ Feel the Life, Feel the World ~"
+      description: "Explore the universe of programming"
 
     menu:
       main:
@@ -80,10 +76,6 @@ languages:
           weight: 30
           identifier: "tags"
           url: "/en/tags/"
-        - name: "About"
-          weight: 40
-          identifier: "about"
-          url: "/en/about/"
         - name: "中文"
           weight: 100
           identifier: "lang"

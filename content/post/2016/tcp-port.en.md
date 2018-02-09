@@ -1,8 +1,8 @@
 ---
-title: "RPATH"
-tags: ["RPATH", "Linker"]
-date: 2018-02-04T16:47:56+08:00
-licensed: true
+title: "Tcp Port"
+cover: "/img/cover.jpg"
+tags: ["tagA", "tagB"]
+date: 2016-12-16T22:01:06+08:00
 draft: true
 ---
 
