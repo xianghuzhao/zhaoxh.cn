@@ -2,7 +2,7 @@
 title: "QCOW2 格式兼容性"
 tags: ["tagA", "tagB"]
 date: 2017-01-19T22:34:38+08:00
-#draft: true
+draft: true
 ---
 
 Cut out summary from your post content here.
