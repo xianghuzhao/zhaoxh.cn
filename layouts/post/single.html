@@ -28,6 +28,10 @@
         <strong>{{ i18n "permalink" }} : </strong>
         <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Permalink }}</a>
       </p>
+      <p class="post-translation">
+        <strong>Translation : </strong>
+        <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Permalink }}</a>
+      </p>
       {{ if .Params.licensed }}
       <p class="post-license">
         {{ if eq .Lang "zh" }}
