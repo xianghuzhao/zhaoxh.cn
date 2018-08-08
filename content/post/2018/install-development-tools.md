@@ -23,20 +23,34 @@ Linux 下非常适合进行软件开发，软件开发环境的创建也是非�
 
 ### Arch
 
+在 Arch 下可以安装 [`base-devel` group](https://www.archlinux.org/groups/x86_64/base-devel/)：
+
 ```bash
 sudo pacman -S base-devel
 ```
 
 ### Ubuntu / Debian
 
+[build-essential](https://packages.debian.org/sid/build-essential)
+包含了所有相关软件包的依赖。
+
 ```bash
 sudo apt-get install build-essential
 ```
 
-### CentOS
+### CentOS / RHEL
+
+`yum` 需要使用 `groupinstall` 命令安装：
 
 ```bash
 sudo yum groupinstall "Development Tools"
+```
+
+如果想知道 "Development Tools" 这个 group 里面都包含了什么，
+可以使用 `group info` 命令查看：
+
+```bash
+sudo yum groupinfo "Development Tools"
 ```
 
 ### Fedora
@@ -45,7 +59,7 @@ sudo yum groupinstall "Development Tools"
 sudo dnf install @development-tools
 ```
 
-目前 `yum` 也是可以用的
+目前 `yum` 也是可以用的：
 
 ```bash
 sudo yum groupinstall "Development Tools"
