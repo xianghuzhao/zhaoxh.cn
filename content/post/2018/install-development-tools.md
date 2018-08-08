@@ -31,7 +31,7 @@ sudo pacman -S base-devel
 
 ### Ubuntu / Debian
 
-[build-essential](https://packages.debian.org/sid/build-essential)
+[`build-essential`](https://packages.debian.org/sid/build-essential)
 包含了所有相关软件包的依赖。
 
 ```bash
@@ -50,7 +50,7 @@ sudo yum groupinstall "Development Tools"
 可以使用 `group info` 命令查看：
 
 ```bash
-sudo yum groupinfo "Development Tools"
+yum groupinfo "Development Tools"
 ```
 
 ### Fedora
