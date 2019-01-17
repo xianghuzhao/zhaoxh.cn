@@ -64,3 +64,6 @@ The benchmark has a three kind of tests:
   3. Complete test. Load some data from DB using ORM, insert a new object, sort and render to template.
 
 
+Here is some example:
+
+<https://github.com/the-benchmarker/web-frameworks>
