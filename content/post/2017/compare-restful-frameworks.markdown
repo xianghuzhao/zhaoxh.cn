@@ -11,7 +11,7 @@ These frameworks are mostly used for creating RESTful api, not as a full-stack w
 
 
 
-  1. Ruby: pure RACK, grape, sinatra, rails-api
+  1. Ruby: pure RACK, roda, grape, sinatra, rails-api
 
 
   2. Python: pure WSGI, flask, falcon
