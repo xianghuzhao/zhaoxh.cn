@@ -29,3 +29,11 @@ p.post-license {
 .comment-hidden {
   display: none;
 }
+
+// remove ads of changyan
+#pop_ad {
+  opacity: 0;
+}
+.module-cmt-list {
+  display: none!important;
+}
