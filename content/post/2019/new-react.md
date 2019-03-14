@@ -39,17 +39,6 @@ Add scripts in `package.json`:
   },
 ```
 
-Create `.babel.rc`:
-
-```js
-{
-  "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-  ]
-}
-```
-
 Create `public/index.html`:
 
 ```html
@@ -94,6 +83,8 @@ export default App;
 ```
 
 Create `webpack.config.js`. The entry is set to `src/index.js`.
+Do __NOT__ need to use `.babelrc` since the options could be specified
+here in `options`.
 
 ```js
 const path = require("path");
@@ -107,7 +98,12 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         loader: "babel-loader",
-        options: { presets: ["@babel/preset-env"] }
+        options: {
+          presets: [
+            "@babel/preset-env",
+            "@babel/preset-react"
+          ]
+        }
       },
       {
         test: /\.css$/,
