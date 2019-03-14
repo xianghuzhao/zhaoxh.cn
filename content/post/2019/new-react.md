@@ -83,7 +83,7 @@ export default App;
 ```
 
 Create `webpack.config.js`. The entry is set to `src/index.js`.
-Do __NOT__ need to use `.babelrc` since the options could be specified
+Do __NOT__ need to use `.babelrc` since it could be specified
 here in `options`.
 
 ```js
