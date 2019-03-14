@@ -64,7 +64,7 @@ Create `public/index.html`:
 
 Create `src/index.js`:
 
-```js
+```jsx
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App.js";
@@ -74,7 +74,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 Create `src/App.js`:
 
-```js
+```jsx
 import React from "react";
 
 const App = () => <div>Hello World!</div>
