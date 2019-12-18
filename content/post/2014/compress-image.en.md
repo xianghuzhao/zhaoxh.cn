@@ -1,6 +1,6 @@
 ---
-title: "Compress Image"
-tags: ["tagA", "tagB"]
+title: "Minimize the Size of QCOW2 Image"
+tags: ["qcow2"]
 date: 2014-08-11T22:11:45+08:00
 draft: true
 ---

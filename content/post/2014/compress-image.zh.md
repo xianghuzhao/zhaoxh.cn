@@ -1,6 +1,6 @@
 ---
-title: "压缩虚拟机镜像文件"
-tags: ["tagA", "tagB"]
+title: "压缩 QCOW2 虚拟机镜像文件"
+tags: ["qcow2"]
 date: 2014-08-11T22:11:45+08:00
 draft: true
 ---
