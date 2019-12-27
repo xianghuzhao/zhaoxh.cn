@@ -1,4 +1,5 @@
 module.exports = {
+  lang: "zh-CN",
   language_name: "简体中文",
   title: "虎泉笔谈",
   subtitle: "~ 见自己，见天地，见众生 ~",

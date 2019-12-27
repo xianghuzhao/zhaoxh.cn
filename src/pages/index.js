@@ -9,9 +9,10 @@ class BlogIndex extends React.Component {
   render() {
     const { data } = this.props
     const posts = data.allMarkdownRemark.edges
+    const { locale } = this.props.pageContext
 
     return (
-      <Layout>
+      <Layout locale={locale}>
         <SEO title="All posts" />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
@@ -47,17 +48,16 @@ class BlogIndex extends React.Component {
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query {
+  query BlogListByLocale($locale: String!, $dateFormat: String!) {
     site {
       siteMetadata {
         title
-        languages {
-          defaultLangKey
-          langs
-        }
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      filter: { fields: { locale: { eq: $locale } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
       edges {
         node {
           excerpt
@@ -65,7 +65,7 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: $dateFormat)
             title
             description
           }

@@ -9,10 +9,22 @@ class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
-    const { previous, next } = this.props.pageContext
+    const siteUrl = this.props.data.site.siteMetadata.siteUrl
+    const { slug, locale, previous, next } = this.props.pageContext
+
+    const allPost = this.props.data.allMarkdownRemark.edges
+    const otherPost = allPost.find(p => p.node.fields.locale !== locale)
+    const otherLocale = otherPost ? otherPost.node.fields.locale : null
+    const otherLink = otherPost ? otherPost.node.fields.slug : null
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout
+        location={this.props.location}
+        title={siteTitle}
+        locale={locale}
+        otherLocale={otherLocale}
+        otherLink={otherLink}
+      >
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
@@ -38,6 +50,22 @@ class BlogPostTemplate extends React.Component {
             </p>
           </header>
           <section dangerouslySetInnerHTML={{ __html: post.html }} />
+          <footer>
+            <p className="post-permalink">
+              <strong>permalink : </strong>
+              <Link to={slug} title={post.frontmatter.title}>
+                {`${siteUrl}${slug}`}
+              </Link>
+            </p>
+            {otherPost && (
+              <p className="post-translation">
+                <strong>Translation : </strong>
+                <Link to={otherPost.node.fields.slug}>
+                  {`${siteUrl}${otherPost.node.fields.slug}`}
+                </Link>
+              </p>
+            )}
+          </footer>
           <hr
             style={{
               marginBottom: rhythm(1),
@@ -79,10 +107,11 @@ class BlogPostTemplate extends React.Component {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query BlogPostBySlug($slug: String!, $dateFormat: String!, $pageID: String!) {
     site {
       siteMetadata {
         title
+        siteUrl
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
@@ -91,8 +120,18 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: $dateFormat)
         description
+      }
+    }
+    allMarkdownRemark(filter: { fields: { pageID: { eq: $pageID } } }) {
+      edges {
+        node {
+          fields {
+            slug
+            locale
+          }
+        }
       }
     }
   }

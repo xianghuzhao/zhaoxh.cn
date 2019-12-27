@@ -1,4 +1,5 @@
 module.exports = {
+  lang: "en-US",
   language_name: "English",
   title: "Xianghu's Blog",
   subtitle: "~ Feel the Life, Feel the World ~",
