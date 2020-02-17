@@ -8,4 +8,6 @@ module.exports = {
   work: "作品",
   tag: "标签",
   alternative_language: "English",
+  permalink: "本文链接",
+  alternative_page: "English version",
 }

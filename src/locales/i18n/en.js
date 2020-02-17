@@ -8,4 +8,6 @@ module.exports = {
   work: "Works",
   tag: "Tags",
   alternative_language: "中文",
+  permalink: "Permalink",
+  alternative_page: "中文版本",
 }

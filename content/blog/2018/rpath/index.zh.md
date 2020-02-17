@@ -8,8 +8,8 @@ draft: true
 
 `RPATH` 使用
 
-<!--more-->
-
 `RPATH` 以及 `RUNPATH`
 
 `LD_LIBRARY_PATH`
+
+`Makefile` 和 `CMakeList.txt`

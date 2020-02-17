@@ -1,34 +1,39 @@
 import React from "react"
+import styled from "styled-components"
 
 import Sidebar from "./sidebar"
-import { rhythm } from "../utils/typography"
+import { Hr } from "./style"
 
-import "../styles/layout.scss"
+const MainFrame = styled.div`
+  position: relative;
+  margin-left: 14rem;
+  margin-right: auto;
+  width: calc(100% - 14rem);
+  padding: 1.5rem 2rem;
+`
 
-const Layout = ({ children, locale, otherLocale, otherLink }) => (
+const MainBody = styled.div`
+  margin: auto;
+  min-width: 240px;
+  max-width: 900px;
+  padding: 1.5rem 2rem;
+`
+
+const Layout = ({ children, locale, otherLink }) => (
   <div>
     <div>
-      <Sidebar
-        locale={locale}
-        otherLocale={otherLocale}
-        otherLink={otherLink}
-      />
+      <Sidebar locale={locale} otherLink={otherLink} />
     </div>
-    <div className="main-frame">
-      <div className="main-body">
+    <MainFrame>
+      <MainBody>
         <main className="post-list">{children}</main>
-        <hr
-          style={{
-            marginTop: rhythm(1),
-          }}
-        />
-        <footer className="footer">
+        <footer>
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
-      </div>
-    </div>
+      </MainBody>
+    </MainFrame>
   </div>
 )
 
