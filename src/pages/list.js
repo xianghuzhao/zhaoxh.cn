@@ -3,8 +3,8 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
 import { Hr } from "../components/style"
+import { rhythm } from "../utils/typography"
 
 class BlogIndex extends React.Component {
   render() {
@@ -64,7 +64,7 @@ export const pageQuery = graphql`
         node {
           excerpt
           fields {
-            slug
+            postPath
           }
           frontmatter {
             date(formatString: $dateFormat)

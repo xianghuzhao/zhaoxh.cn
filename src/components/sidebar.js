@@ -8,8 +8,8 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import { faWeixin } from "@fortawesome/free-brands-svg-icons"
 import { faRss } from "@fortawesome/free-solid-svg-icons"
 
-import locales from "../locales/lang"
 import messages from "../locales/messages"
+import { otherLocale, localeUrl } from "../utils/locale"
 
 import avatar from "../../content/assets/image/avatar400.jpg"
 
@@ -73,7 +73,7 @@ const SocialList = styled.ul`
 
 const SocialItem = styled.li`
   display: inline-block;
-  font-size: 1rem;
+  font-size: 1.2rem;
   a {
     color: darkgray;
     &:hover {
@@ -83,8 +83,6 @@ const SocialItem = styled.li`
 `
 
 const SocialIcon = styled(FontAwesomeIcon)`
-  width: 1.2em;
-  height: 1.2em;
   fill: darkgray;
 
   &:hover {
@@ -96,8 +94,13 @@ const Avatar = styled.img`
   margin-top: 3rem;
   width: 90%;
   border-radius: 50%;
-  border: 4px solid white;
-  box-shadow: 0 1px 3px gray;
+  border: 3px solid white;
+  box-shadow: 0 0 5px gray;
+  //transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 3px gray;
+  }
 `
 
 const NavMenu = ({ locale, otherLink }) => {
@@ -105,25 +108,29 @@ const NavMenu = ({ locale, otherLink }) => {
   if (otherLink) {
     finalOtherLink = otherLink
   } else {
-    const otherLocale = Object.keys(locales.lang).find(l => l !== locale)
-    finalOtherLink = otherLocale === locales.default ? `/` : `/${otherLocale}/`
+    finalOtherLink = localeUrl(otherLocale(locale), `/`)
   }
 
   return (
     <NavMenuStyled>
       <MenuList>
         <MenuItem>
-          <Link to={`/`}>{messages[locale].home_page}</Link>
+          <Link to={localeUrl(locale, `/`)}>{messages[locale].homePage}</Link>
         </MenuItem>
         <MenuItem>
           <a href="//github.com/xianghuzhao">{messages[locale].work}</a>
         </MenuItem>
         <MenuItem>
-          <Link to={`/tags/`}>{messages[locale].tag}</Link>
+          <Link to={localeUrl(locale, `/tags/`)}>{messages[locale].tag}</Link>
+        </MenuItem>
+        <MenuItem>
+          <Link to={localeUrl(locale, `/about/`)}>
+            {messages[locale].about}
+          </Link>
         </MenuItem>
         <MenuItem>
           <Link to={finalOtherLink}>
-            {messages[locale].alternative_language}
+            {messages[locale].alternativeLanguage}
           </Link>
         </MenuItem>
       </MenuList>

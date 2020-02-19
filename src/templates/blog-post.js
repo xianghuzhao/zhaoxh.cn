@@ -11,18 +11,21 @@ class BlogPostTemplate extends React.Component {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
     const siteUrl = this.props.data.site.siteMetadata.siteUrl
-    const { slug, locale, previous, next } = this.props.pageContext
-
-    const allPost = this.props.data.allMarkdownRemark.edges
-    const otherPost = allPost.find(p => p.node.fields.locale !== locale)
-    const otherLink = otherPost ? otherPost.node.fields.slug : null
+    const {
+      slug,
+      otherSlug,
+      hasTranslation,
+      locale,
+      previous,
+      next,
+    } = this.props.pageContext
 
     return (
       <Layout
         location={this.props.location}
         title={siteTitle}
         locale={locale}
-        otherLink={otherLink}
+        otherLink={otherSlug}
       >
         <SEO
           title={post.frontmatter.title}
@@ -62,12 +65,10 @@ class BlogPostTemplate extends React.Component {
                 {`${siteUrl}${slug}`}
               </Link>
             </p>
-            {otherPost && (
+            {hasTranslation && (
               <p className="post-translation">
-                <strong>{messages[locale].alternative_language} : </strong>
-                <Link to={otherPost.node.fields.slug}>
-                  {`${siteUrl}${otherPost.node.fields.slug}`}
-                </Link>
+                <strong>{messages[locale].alternativePage} : </strong>
+                <Link to={otherSlug}>{`${siteUrl}${otherSlug}`}</Link>
               </p>
             )}
           </footer>
@@ -85,20 +86,21 @@ class BlogPostTemplate extends React.Component {
               flexWrap: `wrap`,
               justifyContent: `space-between`,
               listStyle: `none`,
+              marginLeft: 0,
               padding: 0,
             }}
           >
             <li>
               {previous && (
-                <Link to={previous.fields.slug} rel="prev">
-                  ← {previous.frontmatter.title}
+                <Link to={previous.slug} rel="prev">
+                  ← {previous.title}
                 </Link>
               )}
             </li>
             <li>
               {next && (
-                <Link to={next.fields.slug} rel="next">
-                  {next.frontmatter.title} →
+                <Link to={next.slug} rel="next">
+                  {next.title} →
                 </Link>
               )}
             </li>
@@ -112,31 +114,27 @@ class BlogPostTemplate extends React.Component {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!, $dateFormat: String!, $pageID: String!) {
+  query BlogPostByIDAndLocale(
+    $postID: String!
+    $postLocale: String!
+    $dateFormat: String!
+  ) {
     site {
       siteMetadata {
         title
         siteUrl
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    markdownRemark(
+      fields: { postID: { eq: $postID }, locale: { eq: $postLocale } }
+    ) {
       id
-      excerpt(pruneLength: 160)
+      excerpt(pruneLength: 70)
       html
       frontmatter {
         title
         date(formatString: $dateFormat)
         description
-      }
-    }
-    allMarkdownRemark(filter: { fields: { pageID: { eq: $pageID } } }) {
-      edges {
-        node {
-          fields {
-            slug
-            locale
-          }
-        }
       }
     }
   }

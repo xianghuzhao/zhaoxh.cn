@@ -1,3 +1,6 @@
+const locales = require(`../locales/lang`)
+const { isDefaultLocale } = require(`./locale`)
+
 // Use a little helper function to remove trailing slashes from paths
 exports.removeTrailingSlash = path =>
   path === `/` ? path : path.replace(/\/$/, ``)
@@ -21,7 +24,7 @@ function findFileNode({ node, getNode }) {
 
     if (whileCount > 100) {
       console.log(
-        `It looks like you have a node that's set its parent as itself`,
+        `It looks like you have a node that's set its parent as itself:`,
         fileNode
       )
     }
@@ -31,12 +34,21 @@ function findFileNode({ node, getNode }) {
 }
 
 exports.generateSlug = ({
-  node,
-  getNode,
+  locale,
+  postID = ``,
   prefix = ``,
   trailingSlash = true,
-  locales,
 }) => {
+  return path.posix.join(
+    `/`,
+    isDefaultLocale(locale) ? `` : locale,
+    prefix,
+    postID,
+    trailingSlash ? `/` : ``
+  )
+}
+
+exports.generateNodeFields = ({ node, getNode }) => {
   // Find the File node
   const fileNode = findFileNode({
     node,
@@ -47,19 +59,12 @@ exports.generateSlug = ({
 
   const fragName = name.split(`.`)
   const pageName = fragName[0]
-  const localeName = fragName.length === 1 ? locales.default : fragName[1]
-  const isDefault = localeName === locales.default
+  const locale = fragName.length === 1 ? locales.default : fragName[1]
 
   const parsedName = pageName === `index` ? `` : pageName
-  const pageID = path.posix.join(dir, parsedName)
+  const postID = path.posix.join(dir, parsedName)
 
-  const slug = path.posix.join(
-    `/`,
-    isDefault ? `` : localeName,
-    prefix,
-    pageID,
-    trailingSlash ? `/` : ``
-  )
+  const postPath = locale + `_` + postID
 
-  return { slug, pageID, lang: localeName, isDefault }
+  return { postID, locale, postPath }
 }

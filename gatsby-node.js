@@ -1,8 +1,10 @@
 const path = require(`path`)
 
 const locales = require(`./src/locales/lang`)
+const { isDefaultLocale, otherLocale } = require(`./src/utils/locale`)
 const {
   removeTrailingSlash,
+  generateNodeFields,
   generateSlug,
 } = require(`./src/utils/gatsby-node-helpers`)
 
@@ -11,19 +13,19 @@ exports.onCreatePage = ({ page, actions }) => {
 
   deletePage(page)
 
-  Object.keys(locales.lang).forEach(lang => {
+  Object.keys(locales.lang).forEach(locale => {
     const localizedPath =
-      lang === locales.default
+      locale === locales.default
         ? page.path
-        : `${locales.lang[lang].path}${page.path}`
+        : `${locales.lang[locale].path}${page.path}`
 
     return createPage({
       ...page,
       path: removeTrailingSlash(localizedPath),
       context: {
         ...page.context,
-        locale: lang,
-        dateFormat: locales.lang[lang].dateFormat,
+        locale: locale,
+        dateFormat: locales.lang[locale].dateFormat,
       },
     })
   })
@@ -33,6 +35,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  const blogList = path.resolve(`./src/templates/blog-list.js`)
 
   const result = await graphql(`
     {
@@ -42,14 +45,16 @@ exports.createPages = async ({ graphql, actions }) => {
       ) {
         edges {
           node {
+            excerpt
             fields {
-              slug
-              pageID
+              postPath
+              postID
               locale
-              isDefault
             }
             frontmatter {
+              date
               title
+              description
             }
           }
         }
@@ -63,33 +68,119 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const posts = result.data.allMarkdownRemark.edges
 
-  const resultPosts = {}
-  Object.keys(locales.lang).forEach(lang => {
-    resultPosts[lang] = []
-  })
-  posts.forEach(post => {
-    resultPosts[post.node.fields.locale].push(post)
+  const resultPages = {}
+  Object.keys(locales.lang).forEach(locale => {
+    resultPages[locale] = []
   })
 
-  Object.keys(resultPosts).forEach(lang => {
-    resultPosts[lang].forEach((post, index) => {
+  posts.forEach(post => {
+    const locale = post.node.fields.locale
+    const postID = post.node.fields.postID
+
+    const theOtherLocale = otherLocale(locale)
+
+    const findOtherLocale = posts.find(
+      p => p.node.fields.postID === postID && p.node.fields.locale !== locale
+    )
+
+    const slug = generateSlug({ locale, postID, prefix: `post` })
+    const otherSlug = generateSlug({
+      locale: theOtherLocale,
+      postID,
+      prefix: `post`,
+    })
+
+    if (findOtherLocale) {
+      resultPages[locale].push({
+        post,
+        slug,
+        otherSlug,
+        hasTranslation: true,
+      })
+    } else {
+      resultPages[locale].push({
+        post,
+        slug,
+        otherSlug,
+        hasTranslation: false,
+      })
+      resultPages[theOtherLocale].push({
+        post,
+        slug: otherSlug,
+        otherSlug: slug,
+        hasTranslation: false,
+      })
+    }
+  })
+
+  Object.keys(resultPages).forEach(locale => {
+    resultPages[locale].forEach((page, index) => {
+      const postPath = page.post.node.fields.postPath
+      const postID = page.post.node.fields.postID
+      const postLocale = page.post.node.fields.locale
+
       const previous =
-        index === resultPosts[lang].length - 1
+        index === resultPages[locale].length - 1
           ? null
-          : resultPosts[lang][index + 1].node
-      const next = index === 0 ? null : resultPosts[lang][index - 1].node
+          : {
+              slug: resultPages[locale][index + 1].slug,
+              title: resultPages[locale][index + 1].post.node.frontmatter.title,
+            }
+      const next =
+        index === 0
+          ? null
+          : {
+              slug: resultPages[locale][index - 1].slug,
+              title: resultPages[locale][index - 1].post.node.frontmatter.title,
+            }
 
       createPage({
-        path: post.node.fields.slug,
+        path: page.slug,
         component: blogPost,
         context: {
-          slug: post.node.fields.slug,
-          pageID: post.node.fields.pageID,
-          locale: lang,
-          isDefault: post.node.fields.isDefault,
-          dateFormat: locales.lang[lang].dateFormat,
+          slug: page.slug,
+          otherSlug: page.otherSlug,
+          hasTranslation: page.hasTranslation,
+          postPath,
+          postID,
+          locale,
+          postLocale,
+          isDefault: isDefaultLocale(locale),
+          dateFormat: locales.lang[locale].dateFormat,
           previous,
           next,
+        },
+      })
+    })
+
+    const postsPerPage = 10
+    const numPages = Math.ceil(resultPages[locale].length / postsPerPage)
+    Array.from({ length: numPages }).forEach((_, i) => {
+      const slug = generateSlug({
+        locale,
+        prefix: i === 0 ? `` : `blog/${i + 1}`,
+      })
+      const postList = resultPages[locale]
+        .slice(
+          i * postsPerPage,
+          i * postsPerPage +
+            Math.min(
+              postsPerPage,
+              resultPages[locale].length - i * postsPerPage
+            )
+        )
+        .map(p => ({ node: p.post.node, slug: p.slug }))
+
+      createPage({
+        path: slug,
+        component: blogList,
+        context: {
+          slug,
+          numPages,
+          locale,
+          currentPage: i + 1,
+          dateFormat: locales.lang[locale].dateFormat,
+          postList,
         },
       })
     })
@@ -100,16 +191,14 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
-    const { slug, pageID, lang, isDefault } = generateSlug({
+    const { postID, locale, postPath } = generateNodeFields({
       node,
       getNode,
-      prefix: `blog`,
       locales,
     })
 
-    createNodeField({ node, name: `slug`, value: slug })
-    createNodeField({ node, name: `pageID`, value: pageID })
-    createNodeField({ node, name: `locale`, value: lang })
-    createNodeField({ node, name: `isDefault`, value: isDefault })
+    createNodeField({ node, name: `postPath`, value: postPath })
+    createNodeField({ node, name: `postID`, value: postID })
+    createNodeField({ node, name: `locale`, value: locale })
   }
 }
