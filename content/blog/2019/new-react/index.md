@@ -1,6 +1,6 @@
 ---
-title: "Create a New React App"
-tags: ["react"]
+title: "从头开始新建 React 应用"
+tags: [React, Node.js, JavaScript, Babel, webpack]
 date: 2019-03-14T10:45:23+08:00
 licensed: true
 draft: false

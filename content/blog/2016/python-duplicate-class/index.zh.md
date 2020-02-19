@@ -8,7 +8,7 @@ categories:
 - 未分类
 ---
 
-# 继承
+## 继承
 
 创建新的类。虽然可以实现，但是本应是相同层次结构
 
@@ -20,7 +20,7 @@ new_class.__name__ == 'new_class'
 ```
 
 
-# 创建新类
+## 创建新类
 
 无继承关系，相同层次
 
@@ -33,7 +33,7 @@ new_class.__name__ == 'new_class'
 需要注意 mutable attribute values
 
 
-# 赋值
+## 赋值
 
 指向同一个类，相当于别名
 
@@ -44,7 +44,7 @@ new_class.__name__ == 'old_class'
 ```
 
 
-# 导入
+## 导入
 
 指向同一个类
 
@@ -57,7 +57,7 @@ new_class.__name__ == 'old_class'
 但是不知道如何导入同一模块中的其他类
 
 
-# 参考：
+## 参考：
 
 <http://stackoverflow.com/questions/840969/how-do-you-alias-a-python-class-to-have-another-name-without-using-inheritance>
 
