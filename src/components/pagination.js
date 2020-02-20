@@ -99,7 +99,7 @@ const Pagination = ({ prefix, prefixFirst, numPages, currentPage }) => {
     ) : (
       <PagiNext
         as={PagiBoxActive}
-        to={`${prefix}/${currentPage + 1}`}
+        to={`${prefix}/${currentPage + 1}/`}
         rel="next"
       >
         <PagiIcon icon={faAngleRight} />
