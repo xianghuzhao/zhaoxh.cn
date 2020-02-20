@@ -155,7 +155,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     const postsPerPage = 10
     const numPages = Math.ceil(resultPages[locale].length / postsPerPage)
-    [...Array(numPages)].forEach((_, i) => {
+    Array.from({ length: numPages }).forEach((_, i) => {
       const slug = generateSlug({
         locale,
         prefix: i === 0 ? `` : `blog/${i + 1}`,

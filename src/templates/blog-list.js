@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import moment from "moment"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -11,11 +12,17 @@ import messages from "../locales/messages"
 
 export default class BlogList extends React.Component {
   render() {
-    const { locale, postList, numPages, currentPage } = this.props.pageContext
+    const {
+      locale,
+      postList,
+      dateFormat,
+      numPages,
+      currentPage,
+    } = this.props.pageContext
 
     return (
       <Layout locale={locale}>
-        <SEO title={messages[locale].allPosts} />
+        <SEO title={messages[locale].allPosts} lang={locale} />
         {postList.map(({ node, slug }) => {
           const title = node.frontmatter.title || slug
           return (
@@ -30,7 +37,9 @@ export default class BlogList extends React.Component {
                     {title}
                   </Link>
                 </h3>
-                <small>{node.frontmatter.date}</small>
+                <small>
+                  {moment(node.frontmatter.date).format(dateFormat)}
+                </small>
               </header>
               <section>
                 <p

@@ -1,7 +1,7 @@
 ---
 title: "Linux 下的时间同步"
 tags: [linux, 'Time Sync', NTP, systemd, chrony]
-date: 2019-10-08T03:16:55+08:00
+date: 2019-05-31T00:09:38+08:00
 licensed: true
 draft: false
 ---

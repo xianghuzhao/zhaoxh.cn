@@ -1,5 +1,5 @@
 ---
-title: "轻量级的任务分发系统"
+title: "Herald: 轻量级的任务分发系统"
 tags: [go, herald, 'task manager']
 date: 2019-08-25T19:07:18+08:00
 licensed: true
