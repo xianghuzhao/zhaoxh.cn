@@ -12,4 +12,6 @@ module.exports = {
   permalink: "本文链接",
   alternativePage: "English version of this article",
   allPosts: "所有文章",
+  builtWith: "本网站使用",
+  builtWithEnd: "创建",
 }

@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
+import { Hr } from "../components/style"
 import messages from "../locales/messages"
 
 class BlogPostTemplate extends React.Component {
@@ -72,11 +73,7 @@ class BlogPostTemplate extends React.Component {
               </p>
             )}
           </footer>
-          <hr
-            style={{
-              marginBottom: rhythm(1),
-            }}
-          />
+          <Hr />
         </article>
 
         <nav>

@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
+import messages from "../locales/messages"
 import Sidebar from "./sidebar"
 import { Hr } from "./style"
 
@@ -19,6 +20,10 @@ const MainBody = styled.div`
   padding: 1.5rem 2rem;
 `
 
+const Footer = styled.footer`
+  text-align: center;
+`
+
 const Layout = ({ children, locale, otherLink }) => (
   <div>
     <div>
@@ -26,12 +31,14 @@ const Layout = ({ children, locale, otherLink }) => (
     </div>
     <MainFrame>
       <MainBody>
-        <main className="post-list">{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
+        <main>{children}</main>
+        <Hr />
+        <Footer>
+          © {new Date().getFullYear()}, {messages[locale].builtWith}
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+          {` ${messages[locale].builtWithEnd}`}
+        </Footer>
       </MainBody>
     </MainFrame>
   </div>

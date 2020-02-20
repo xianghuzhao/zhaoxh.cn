@@ -12,4 +12,6 @@ module.exports = {
   permalink: "Permalink",
   alternativePage: "本文中文版本",
   allPosts: "All posts",
+  builtWith: "Built with",
+  builtWithEnd: "",
 }

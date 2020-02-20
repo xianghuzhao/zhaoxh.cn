@@ -1,10 +1,12 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Pagination from "../components/pagination"
 import { Hr } from "../components/style"
 import { rhythm } from "../utils/typography"
+import { localeUrl } from "../utils/locale"
 import messages from "../locales/messages"
 
 export default class BlogList extends React.Component {
@@ -41,6 +43,12 @@ export default class BlogList extends React.Component {
             </article>
           )
         })}
+        <Pagination
+          prefix={localeUrl(locale, `/blog/`)}
+          prefixFirst={localeUrl(locale, `/`)}
+          numPages={numPages}
+          currentPage={currentPage}
+        />
       </Layout>
     )
   }
