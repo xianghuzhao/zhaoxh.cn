@@ -1,8 +1,26 @@
 import React from "react"
-const AboutPage = () => (
-  <main>
-    <h1>About the Author</h1>
-    <p>Welcome to my Gatsby site.</p>
-  </main>
-)
+
+import Layout from "../components/layout"
+import Title from "../components/title"
+import SEO from "../components/seo"
+import messages from "../locales/messages"
+
+const AboutPage = ({ pageContext: { locale, otherSlug } }) => {
+  return (
+    <Layout locale={locale} otherLink={otherSlug}>
+      <SEO title={messages[locale].about} />
+      <Title title={messages[locale].about} />
+      <section>
+        <p>About me.</p>
+        <p>
+          {messages[locale].builtWith}
+          {` `}
+          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          {` ${messages[locale].builtWithEnd}`}
+        </p>
+      </section>
+    </Layout>
+  )
+}
+
 export default AboutPage

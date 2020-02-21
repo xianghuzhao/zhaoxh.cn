@@ -18,13 +18,22 @@ exports.onCreatePage = ({ page, actions }) => {
       locale === locales.default
         ? page.path
         : `${locales.lang[locale].path}${page.path}`
+    const originPath = page.path
+    const slug = generateSlug({ locale, prefix: originPath })
+    const otherSlug = generateSlug({
+      locale: otherLocale(locale),
+      prefix: originPath,
+    })
 
     return createPage({
       ...page,
       path: removeTrailingSlash(localizedPath),
       context: {
         ...page.context,
-        locale: locale,
+        locale,
+        originPath,
+        slug,
+        otherSlug,
         dateFormat: locales.lang[locale].dateFormat,
       },
     })
@@ -47,7 +56,6 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             excerpt
             fields {
-              postPath
               postID
               locale
             }
@@ -114,11 +122,9 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   Object.keys(resultPages).forEach(locale => {
-    resultPages[locale].forEach((page, index) => {
-      const postPath = page.post.node.fields.postPath
-      const postID = page.post.node.fields.postID
-      const postLocale = page.post.node.fields.locale
+    const theOtherLocale = otherLocale(locale)
 
+    resultPages[locale].forEach((page, index) => {
       const previous =
         index === resultPages[locale].length - 1
           ? null
@@ -141,10 +147,9 @@ exports.createPages = async ({ graphql, actions }) => {
           slug: page.slug,
           otherSlug: page.otherSlug,
           hasTranslation: page.hasTranslation,
-          postPath,
-          postID,
+          postID: page.post.node.fields.postID,
           locale,
-          postLocale,
+          postLocale: page.post.node.fields.locale,
           isDefault: isDefaultLocale(locale),
           dateFormat: locales.lang[locale].dateFormat,
           previous,
@@ -156,9 +161,11 @@ exports.createPages = async ({ graphql, actions }) => {
     const postsPerPage = 10
     const numPages = Math.ceil(resultPages[locale].length / postsPerPage)
     Array.from({ length: numPages }).forEach((_, i) => {
-      const slug = generateSlug({
-        locale,
-        prefix: i === 0 ? `` : `blog/${i + 1}`,
+      const pagePath = i === 0 ? `` : `blog/${i + 1}`
+      const slug = generateSlug({ locale, prefix: pagePath })
+      const otherSlug = generateSlug({
+        locale: theOtherLocale,
+        prefix: pagePath,
       })
       const postList = resultPages[locale]
         .slice(
@@ -176,6 +183,7 @@ exports.createPages = async ({ graphql, actions }) => {
         component: blogList,
         context: {
           slug,
+          otherSlug,
           numPages,
           locale,
           currentPage: i + 1,
@@ -191,13 +199,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
-    const { postID, locale, postPath } = generateNodeFields({
+    const { postID, locale } = generateNodeFields({
       node,
       getNode,
       locales,
     })
 
-    createNodeField({ node, name: `postPath`, value: postPath })
     createNodeField({ node, name: `postID`, value: postID })
     createNodeField({ node, name: `locale`, value: locale })
   }

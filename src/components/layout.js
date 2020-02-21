@@ -1,9 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 
-import messages from "../locales/messages"
 import Sidebar from "./sidebar"
-import { Hr } from "./style"
+import Hr from "./hr"
 
 const MainFrame = styled.div`
   position: relative;
@@ -33,12 +32,7 @@ const Layout = ({ children, locale, otherLink }) => (
       <MainBody>
         <main>{children}</main>
         <Hr />
-        <Footer>
-          © {new Date().getFullYear()}, {messages[locale].builtWith}
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-          {` ${messages[locale].builtWithEnd}`}
-        </Footer>
+        <Footer>Copyright © {new Date().getFullYear()}</Footer>
       </MainBody>
     </MainFrame>
   </div>

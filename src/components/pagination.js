@@ -108,11 +108,14 @@ const Pagination = ({ prefix, prefixFirst, numPages, currentPage }) => {
 
   const pages = [...Array(numPages)].map((_, i) =>
     i + 1 === currentPage ? (
-      <PagiPage as={PagiBoxCurrent}>{i + 1}</PagiPage>
+      <PagiPage as={PagiBoxCurrent} key={i + 1}>
+        {i + 1}
+      </PagiPage>
     ) : (
       <PagiPage
         as={PagiBoxActive}
         to={i === 0 ? prefixFirst : `${prefix}/${i + 1}/`}
+        key={i + 1}
       >
         {i + 1}
       </PagiPage>

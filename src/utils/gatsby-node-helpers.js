@@ -64,7 +64,5 @@ exports.generateNodeFields = ({ node, getNode }) => {
   const parsedName = pageName === `index` ? `` : pageName
   const postID = path.posix.join(dir, parsedName)
 
-  const postPath = locale + `_` + postID
-
-  return { postID, locale, postPath }
+  return { postID, locale }
 }

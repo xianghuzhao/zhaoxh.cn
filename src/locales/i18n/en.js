@@ -8,10 +8,12 @@ module.exports = {
   work: "Works",
   tag: "Tags",
   about: "About",
+  resume: "Resume",
   alternativeLanguage: "中文",
   permalink: "Permalink",
   alternativePage: "本文中文版本",
-  allPosts: "All posts",
   builtWith: "Built with",
   builtWithEnd: "",
+  allPosts: "All Posts",
+  tagList: "Tag List",
 }

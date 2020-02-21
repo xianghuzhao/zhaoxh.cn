@@ -13,7 +13,7 @@ module.exports = {
     en: {
       path: `en`,
       locale: `en-US`,
-      dateFormat: `MMM Do, YYYY`,
+      dateFormat: `D MMM YYYY`,
       siteLanguage: `en`,
       ogLanguage: `en_US`,
       defaultTitle: `Xianghu's Blog`,

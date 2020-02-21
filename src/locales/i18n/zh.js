@@ -8,10 +8,12 @@ module.exports = {
   work: "作品",
   tag: "标签",
   about: "关于",
+  resume: "简历",
   alternativeLanguage: "English",
   permalink: "本文链接",
   alternativePage: "English version of this article",
-  allPosts: "所有文章",
   builtWith: "本网站使用",
   builtWithEnd: "创建",
+  allPosts: "所有文章",
+  tagList: "标签列表",
 }

@@ -1,14 +1,29 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import styled from "styled-components"
 
 import Layout from "../components/layout"
+import Title from "../components/title"
 import SEO from "../components/seo"
-import { rhythm, scale } from "../utils/typography"
-import { Hr } from "../components/style"
+import Hr from "../components/hr"
 import messages from "../locales/messages"
 
+const Footer = styled.footer`
+  font-size: 0.8rem;
+  padding-top: 1rem;
+`
+
+const PrevNextNav = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  margin-left: 0;
+  padding: 0;
+`
+
 class BlogPostTemplate extends React.Component {
-  render() {
+  render = () => {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
     const siteUrl = this.props.data.site.siteMetadata.siteUrl
@@ -34,60 +49,30 @@ class BlogPostTemplate extends React.Component {
           lang={locale}
         />
         <article>
-          <header>
-            <h1
-              style={{
-                marginTop: rhythm(1),
-                marginBottom: 0,
-              }}
-            >
-              {post.frontmatter.title}
-            </h1>
-            <p
-              style={{
-                ...scale(-1 / 5),
-                display: `block`,
-                marginBottom: rhythm(1),
-              }}
-            >
-              {post.frontmatter.date}
-            </p>
-          </header>
+          <Title
+            title={post.frontmatter.title}
+            subTitle={post.frontmatter.date}
+          />
           <section dangerouslySetInnerHTML={{ __html: post.html }} />
-          <footer
-            className="post-link"
-            style={{
-              fontSize: rhythm(0.5),
-              paddingTop: rhythm(1),
-            }}
-          >
-            <p className="post-permalink">
+          <Footer>
+            <p>
               <strong>{messages[locale].permalink} : </strong>
               <Link to={slug} title={post.frontmatter.title}>
                 {`${siteUrl}${slug}`}
               </Link>
             </p>
             {hasTranslation && (
-              <p className="post-translation">
+              <p>
                 <strong>{messages[locale].alternativePage} : </strong>
                 <Link to={otherSlug}>{`${siteUrl}${otherSlug}`}</Link>
               </p>
             )}
-          </footer>
+          </Footer>
           <Hr />
         </article>
 
         <nav>
-          <ul
-            style={{
-              display: `flex`,
-              flexWrap: `wrap`,
-              justifyContent: `space-between`,
-              listStyle: `none`,
-              marginLeft: 0,
-              padding: 0,
-            }}
-          >
+          <PrevNextNav>
             <li>
               {previous && (
                 <Link to={previous.slug} rel="prev">
@@ -102,7 +87,7 @@ class BlogPostTemplate extends React.Component {
                 </Link>
               )}
             </li>
-          </ul>
+          </PrevNextNav>
         </nav>
       </Layout>
     )
