@@ -10,6 +10,7 @@ module.exports = {
   tag: "Tag",
   about: "About",
   resume: "Resume",
+  wechat: "WeChat",
   alternativeLanguage: "中文",
   permalink: "Permalink",
   alternativePage: "本文中文版本",

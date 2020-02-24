@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import { faWeixin } from "@fortawesome/free-brands-svg-icons"
-import { faRss } from "@fortawesome/free-solid-svg-icons"
+//import { faRss } from "@fortawesome/free-solid-svg-icons"
 
 import messages from "../locales/messages"
 import { otherLocale, localeUrl } from "../utils/locale"
@@ -124,7 +124,7 @@ const NavMenu = ({ locale, otherLink }) => {
   )
 }
 
-const SocialMenu = () => (
+const SocialMenu = ({ locale }) => (
   <SocialMenuStyled>
     <SocialList>
       <SocialItem>
@@ -138,15 +138,17 @@ const SocialMenu = () => (
         </a>
       </SocialItem>
       <SocialItem>
-        <Link to={`/img/qrcode.png`} title="WeChat">
+        <Link to={localeUrl(locale, `/wechat/`)} title="WeChat">
           <SocialIcon icon={faWeixin} />
         </Link>
       </SocialItem>
+      {/*
       <SocialItem>
         <Link to={`/rss.xml`} title="RSS">
           <SocialIcon icon={faRss} />
         </Link>
       </SocialItem>
+      */}
     </SocialList>
   </SocialMenuStyled>
 )
@@ -156,7 +158,7 @@ const Sidebar = ({ locale, otherLink }) => (
     <header>
       <Avatar locale={locale} />
       <NavMenu locale={locale} otherLink={otherLink} />
-      <SocialMenu />
+      <SocialMenu locale={locale} />
     </header>
   </SidebarStyled>
 )
