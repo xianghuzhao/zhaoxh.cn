@@ -1,30 +1,25 @@
 import React from "react"
 
-import { Link } from "gatsby"
+import Layout from "../components/layout"
+import Title from "../components/title"
+import SEO from "../components/seo"
+import TagList from "../components/taglist"
+import messages from "../locales/messages"
 
-const TagList = ({ pageContext, data }) => {
-  const { tag } = pageContext
-  const { edges, totalCount } = data.allMarkdownRemark
-  const tagHeader = `${totalCount} post${
-    totalCount === 1 ? "" : "s"
-  } tagged with "${tag}"`
+const TagListPage = ({ pageContext }) => {
+  const { locale, otherSlug, tags } = pageContext
   return (
-    <div>
-      <h1>{tagHeader}</h1>
-      <ul>
-        {edges.map(({ node }) => {
-          const { slug } = node.fields
-          const { title } = node.frontmatter
-          return (
-            <li key={slug}>
-              <Link to={slug}>{title}</Link>
-            </li>
-          )
-        })}
-      </ul>
-      <Link to="/tags">All tags</Link>
-    </div>
+    <Layout locale={locale} otherLink={otherSlug}>
+      <SEO title={messages[locale].tagList} />
+      <Title title={messages[locale].tagList} />
+      <TagList
+        locale={locale}
+        tags={tags}
+        tagValue={tag => tag.name}
+        tagText={tag => `${tag.name} (${tag.count})`}
+      />
+    </Layout>
   )
 }
 
-export default TagList
+export default TagListPage

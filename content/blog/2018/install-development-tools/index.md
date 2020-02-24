@@ -1,6 +1,6 @@
 ---
 title: "在 Linux 下安装开发环境"
-tags: ["Linux", "开发环境"]
+tags: ["Linux", "开发环境", "GCC", "GNU Make"]
 date: 2018-08-08T15:33:30+08:00
 licensed: true
 ---

@@ -1,6 +1,6 @@
 ---
-title: "Lazy Load dict in python"
-tags: ["python", "lazy load"]
+title: "Lazy Load dict in Python"
+tags: ["Python", "Lazy Load"]
 date: 2018-05-10T10:13:03+08:00
 licensed: true
 draft: true

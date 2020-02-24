@@ -1,7 +1,7 @@
 ---
 title: "Herald: 轻量级的任务分发系统"
-tags: [go, herald, 'task manager']
-date: 2019-08-25T19:07:18+08:00
+tags: [Go, Herald, 'Task Manager']
+date: 2019-11-15T19:07:18+08:00
 licensed: true
 draft: false
 ---

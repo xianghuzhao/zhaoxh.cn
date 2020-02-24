@@ -107,7 +107,7 @@ const NavMenu = ({ locale, otherLink }) => {
           <a href="//github.com/xianghuzhao">{messages[locale].work}</a>
         </MenuItem>
         <MenuItem>
-          <Link to={localeUrl(locale, `/tags/`)}>{messages[locale].tag}</Link>
+          <Link to={localeUrl(locale, `/tags/`)}>{messages[locale].tags}</Link>
         </MenuItem>
         <MenuItem>
           <Link to={localeUrl(locale, `/about/`)}>
@@ -154,7 +154,7 @@ const SocialMenu = () => (
 const Sidebar = ({ locale, otherLink }) => (
   <SidebarStyled>
     <header>
-      <Avatar />
+      <Avatar locale={locale} />
       <NavMenu locale={locale} otherLink={otherLink} />
       <SocialMenu />
     </header>

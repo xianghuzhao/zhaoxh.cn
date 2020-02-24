@@ -1,5 +1,5 @@
 const locales = require(`../locales/lang`)
-const { isDefaultLocale } = require(`./locale`)
+const { isDefaultLocale, otherLocale } = require(`./locale`)
 
 // Use a little helper function to remove trailing slashes from paths
 exports.removeTrailingSlash = path =>
@@ -8,7 +8,7 @@ exports.removeTrailingSlash = path =>
 // Modified from "gatsby-source-filesystem/create-file-path.js"
 const path = require(`path`)
 
-function findFileNode({ node, getNode }) {
+const findFileNode = ({ node, getNode }) => {
   // Find the file node.
   let fileNode = node
   let whileCount = 0
@@ -33,7 +33,7 @@ function findFileNode({ node, getNode }) {
   return fileNode
 }
 
-exports.generateSlug = ({
+const generateSlug = ({
   locale,
   postID = ``,
   prefix = ``,
@@ -46,6 +46,75 @@ exports.generateSlug = ({
     postID,
     trailingSlash ? `/` : ``
   )
+}
+exports.generateSlug = generateSlug
+
+const addPostResult = ({
+  resultPages,
+  locale,
+  post,
+  slug,
+  otherSlug,
+  hasTranslation,
+}) => {
+  resultPages[locale].pages.push({
+    post,
+    slug,
+    otherSlug,
+    hasTranslation: true,
+  })
+
+  post.node.frontmatter.tags &&
+    post.node.frontmatter.tags.forEach(tag => {
+      resultPages[locale].tags.indexOf(tag) === -1 &&
+        resultPages[locale].tags.push(tag)
+
+      tag in resultPages[locale].tagPages ||
+        (resultPages[locale].tagPages[tag] = [])
+      resultPages[locale].tagPages[tag].push({ post, slug })
+    })
+}
+
+exports.addPost = ({ resultPages, post, otherLocaleFound }) => {
+  const locale = post.node.fields.locale
+  const postID = post.node.fields.postID
+
+  const theOtherLocale = otherLocale(locale)
+
+  const slug = generateSlug({ locale, postID, prefix: `post` })
+  const otherSlug = generateSlug({
+    locale: theOtherLocale,
+    postID,
+    prefix: `post`,
+  })
+
+  if (otherLocaleFound) {
+    addPostResult({
+      resultPages,
+      locale,
+      post,
+      slug,
+      otherSlug,
+      hasTranslation: true,
+    })
+  } else {
+    addPostResult({
+      resultPages,
+      locale,
+      post,
+      slug,
+      otherSlug,
+      hasTranslation: false,
+    })
+    addPostResult({
+      resultPages,
+      locale: theOtherLocale,
+      post,
+      slug: otherSlug,
+      otherSlug: slug,
+      hasTranslation: false,
+    })
+  }
 }
 
 exports.generateNodeFields = ({ node, getNode }) => {

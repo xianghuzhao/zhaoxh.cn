@@ -2,6 +2,7 @@
 author: njutiger
 date: 2015-07-29 01:39:25+00:00
 draft: false
+reproduce: true
 title: '[转] linux shell 正则表达式(BREs,EREs,PREs)差异比较'
 type: post
 categories:

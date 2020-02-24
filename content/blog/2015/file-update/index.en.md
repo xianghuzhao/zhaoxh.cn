@@ -2,6 +2,7 @@
 author: njutiger
 date: 2015-07-08 08:59:00+00:00
 draft: false
+reproduce: true
 title: '[转] Reliable file updates with Python'
 type: post
 categories:

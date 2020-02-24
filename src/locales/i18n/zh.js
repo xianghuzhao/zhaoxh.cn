@@ -6,6 +6,7 @@ module.exports = {
   description: "软件开发心路历程",
   homePage: "主页",
   work: "作品",
+  tags: "标签",
   tag: "标签",
   about: "关于",
   resume: "简历",

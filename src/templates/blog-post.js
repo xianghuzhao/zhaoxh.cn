@@ -6,11 +6,13 @@ import Layout from "../components/layout"
 import Title from "../components/title"
 import SEO from "../components/seo"
 import Hr from "../components/hr"
+import TagList from "../components/taglist"
+import License from "../components/license"
 import messages from "../locales/messages"
 
 const Footer = styled.footer`
   font-size: 0.8rem;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
 `
 
 const PrevNextNav = styled.ul`
@@ -48,6 +50,7 @@ class BlogPostTemplate extends React.Component {
           description={post.frontmatter.description || post.excerpt}
           lang={locale}
         />
+
         <article>
           <Title
             title={post.frontmatter.title}
@@ -55,18 +58,24 @@ class BlogPostTemplate extends React.Component {
           />
           <section dangerouslySetInnerHTML={{ __html: post.html }} />
           <Footer>
-            <p>
-              <strong>{messages[locale].permalink} : </strong>
-              <Link to={slug} title={post.frontmatter.title}>
-                {`${siteUrl}${slug}`}
-              </Link>
-            </p>
+            {post.frontmatter.tags && (
+              <TagList locale={locale} tags={post.frontmatter.tags} />
+            )}
+            {post.frontmatter.reproduce || (
+              <p>
+                <strong>{messages[locale].permalink} : </strong>
+                <Link to={slug} title={post.frontmatter.title}>
+                  {`${siteUrl}${slug}`}
+                </Link>
+              </p>
+            )}
             {hasTranslation && (
               <p>
                 <strong>{messages[locale].alternativePage} : </strong>
                 <Link to={otherSlug}>{`${siteUrl}${otherSlug}`}</Link>
               </p>
             )}
+            {post.frontmatter.licensed && <License locale={locale} />}
           </Footer>
           <Hr />
         </article>
@@ -118,6 +127,9 @@ export const pageQuery = graphql`
         title
         date(formatString: $dateFormat)
         description
+        tags
+        reproduce
+        licensed
       }
     }
   }
