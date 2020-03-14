@@ -1,11 +1,8 @@
 ---
-author: njutiger
-date: 2013-11-23 03:59:48+00:00
-draft: false
 title: Rails 开发环境部署
-type: post
-categories:
-- Web
+date: 2013-11-23T03:59:48+00:00
+tags: [Ruby on Rails, Ruby, Arch Linux]
+draft: false
 ---
 
 在 Arch Linux 上部署 Rails 开发环境：

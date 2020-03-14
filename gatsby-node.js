@@ -1,8 +1,7 @@
 const path = require(`path`)
-const kebabCase = require(`lodash/kebabCase`)
 
 const locales = require(`./src/locales/lang`)
-const { isDefaultLocale, otherLocale } = require(`./src/utils/locale`)
+const { isDefaultLocale, otherLocale, tagPath } = require(`./src/utils/locale`)
 const {
   removeTrailingSlash,
   generateNodeFields,
@@ -201,7 +200,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     // Single tag posts page
     Object.keys(resultPages[locale].tagPages).forEach(tag => {
-      const tagUrl = `/tags/${kebabCase(tag)}/`
+      const tagUrl = `/tags/${tagPath(tag)}/`
       const tagListSlug = generateSlug({ locale, prefix: tagUrl })
       const tagListOtherSlug = generateSlug({
         locale: theOtherLocale,

@@ -3,9 +3,7 @@ author: njutiger
 date: 2013-08-18 05:32:11+00:00
 draft: false
 title: 编译和连接的时候要同时指定 -mthumb 选项
-type: post
-categories:
-- STM32
+tags: [C, STM32, Linker]
 ---
 
 STM32 程序中调用 `strncmp` 函数时始终出现 crash。

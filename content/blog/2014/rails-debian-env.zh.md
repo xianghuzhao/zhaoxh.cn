@@ -1,11 +1,8 @@
 ---
-author: njutiger
-date: 2014-01-20 03:43:05+00:00
-draft: false
 title: Debian 上 Ruby on Rails 开发环境配置
-type: post
-categories:
-- 未分类
+date: 2014-01-20T03:43:05+00:00
+tags: [Ruby on Rails, Ruby, Debian, Node.js]
+draft: false
 ---
 
 ## 1. 基本系统配置

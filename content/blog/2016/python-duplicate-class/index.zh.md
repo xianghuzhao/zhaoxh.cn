@@ -1,11 +1,8 @@
 ---
-author: njutiger
+title: Python 中创建相同的类
 date: 2016-12-18 04:42:19+00:00
-draft: false
-title: python 中创建相同的类
-type: post
-categories:
-- 未分类
+tags: [Python, Class]
+licensed: true
 ---
 
 ## 继承

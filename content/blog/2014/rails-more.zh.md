@@ -1,11 +1,8 @@
 ---
-author: njutiger
-date: 2014-01-17 08:09:56+00:00
-draft: false
 title: Rails 需要进一步了解的内容
-type: post
-categories:
-- 未分类
+date: 2014-01-17T08:09:56+00:00
+tags: [Ruby on Rails, Ruby, RSpec, Spork, Guard]
+draft: false
 ---
 
 关于 Rails 开发还需要了解以下内容：

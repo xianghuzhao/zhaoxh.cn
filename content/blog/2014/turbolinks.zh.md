@@ -1,12 +1,8 @@
 ---
-author: njutiger
-date: 2014-03-16 18:04:51+00:00
-draft: false
 title: jQuery Turbolinks
-type: post
-categories:
-- Web
-- 未分类
+date: 2014-03-16T18:04:51+00:00
+tags: [Ruby on Rails, Ruby, jQuery, Turbolinks]
+draft: false
 ---
 
 写 jquery 的时候发现有些功能第一次打开有效，点击链接进入页面则不起作用，刷新后又可以生效

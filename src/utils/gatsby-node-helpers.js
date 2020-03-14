@@ -61,7 +61,7 @@ const addPostResult = ({
     post,
     slug,
     otherSlug,
-    hasTranslation: true,
+    hasTranslation,
   })
 
   post.node.frontmatter.tags &&

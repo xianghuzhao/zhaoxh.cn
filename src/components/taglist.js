@@ -1,9 +1,8 @@
 import React from "react"
 import Link from "gatsby-link"
 import styled from "styled-components"
-import kebabCase from "lodash/kebabCase"
 
-import { localeUrl } from "../utils/locale"
+import { localeUrl, tagPath } from "../utils/locale"
 
 const TagUl = styled.ul`
   margin-left: 0;
@@ -35,7 +34,7 @@ const TagList = ({ locale, tags, tagValue, tagText }) => (
       const tt = tagText ? tagText(tag) : tag
       return (
         <TagLi key={tv}>
-          <TagLink to={localeUrl(locale, `/tags/${kebabCase(tv)}/`)}>
+          <TagLink to={localeUrl(locale, `/tags/${tagPath(tv)}/`)}>
             {tt}
           </TagLink>
         </TagLi>

@@ -1,8 +1,9 @@
 ---
 title: "在 Linux 下安装开发环境"
-tags: ["Linux", "开发环境", "GCC", "GNU Make"]
+tags: ["Linux", "Development Environment", "GCC", "C", "C++", "GNU Make"]
 date: 2018-08-08T15:33:30+08:00
 licensed: true
+description: Linux 下非常适合进行软件开发，软件开发环境的创建也是非常方便。这里的开发环境指的是 C/C++ 开发环境，包含 C/C++ 编译器、头文件、标准库、代码工具、编译工具以及常用开发库等等。
 ---
 
 Linux 下非常适合进行软件开发，软件开发环境的创建也是非常方便。

@@ -1,11 +1,7 @@
 ---
-author: njutiger
+title: PPTP 服务安装配置
 date: 2014-01-14 01:12:00+00:00
-draft: false
-title: pptpd 安装配置
-type: post
-categories:
-- Server
+tags: [PPTP, Debian, NAT, iptables]
 ---
 
 ### 安装配置 pptpd

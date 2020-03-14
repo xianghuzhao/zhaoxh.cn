@@ -1,11 +1,9 @@
 ---
-author: Xianghu Zhao
-date: 2015-04-27T11:24:04+08:00
-draft: false
 title: Change openstack-dashboard document root from /dashboard to /
-type: post
-categories:
-- 未分类
+date: 2015-04-27T11:24:04+08:00
+tags: [OpenStack, Dashboard, Cloud, Apache]
+licensed: true
+draft: false
 ---
 
 The default entry for OpenStack Dashboard is
@@ -47,9 +45,9 @@ To change openstack-dashboard login url from /dashboard to / run the following s
 3.  restart apache2 service
 
 
-## Use apache redirect
+## Use Apache redirect
 
-Another way to accomplish this is using redirect in apache.
+Another way to accomplish this is using redirect in Apache.
 This method is preferred for me.
 
 Edit /etc/httpd/conf.d/openstack-dashboard.conf

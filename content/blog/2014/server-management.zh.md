@@ -1,11 +1,9 @@
 ---
-author: njutiger
-date: 2014-01-06 16:51:46+00:00
-draft: false
 title: 服务器管理
-type: post
-categories:
-- Server
+date: 2014-01-06T16:51:46+00:00
+tags: [Debian, Server, Locale, Timezone, NTP, PPTP, Ruby on Rails,
+    Ruby, nginx, Passenger]
+draft: false
 ---
 
 ## 基本设置

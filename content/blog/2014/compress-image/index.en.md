@@ -1,7 +1,8 @@
 ---
 title: "Minimize the Size of QCOW2 Image"
-tags: ["qcow2"]
+tags: [QCOW2, QEMU, 'Image Format', 'Virtual Machine']
 date: 2014-08-11T22:11:45+08:00
+licensed: true
 description: "Compress image"
 ---
 

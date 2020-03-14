@@ -13,7 +13,7 @@ const LicenseImage = styled.img`
 const License = ({ locale }) =>
   locale === `zh` ? (
     <LicensePart>
-      <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+      <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">
         <LicenseImage
           alt="知识共享许可协议"
           src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"
@@ -21,7 +21,7 @@ const License = ({ locale }) =>
       </a>
       <br />
       本作品采用{` `}
-      <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+      <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">
         知识共享署名-非商业性使用 4.0 国际许可协议
       </a>
       {` `}进行许可。

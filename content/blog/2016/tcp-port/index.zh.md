@@ -1,7 +1,7 @@
 ---
 title: "检测 TCP 端口是否可连接"
 cover: "/img/cover.jpg"
-tags: ["TCP 端口", "Telnet", "防火墙"]
+tags: ["TCP Port", "Telnet", "Firewall"]
 date: 2016-12-16T22:01:06+08:00
 licensed: true
 ---

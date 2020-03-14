@@ -1,19 +1,34 @@
 ---
 date: 2019-06-06T11:29:35+08:00
-title: Increase Partition Size on KVM Image
+title: 虚拟机镜像文件扩容
+tags: [QCOW2, QEMU, KVM, 'Image Format', LVM, 'Virtual Machine']
+description: 虚拟机根据不同用途需要不同的容量大小。有时候它们是从同一个镜像文件克隆出来的，预设的容量是固定的，所以得想办法根据需要把镜像文件进行扩容。
+licensed: true
 ---
 
-Resize qcow2 image and the partition.
+虚拟机根据不同用途需要不同的容量大小。
+有时候它们是从同一个镜像文件克隆出来的，预设的容量是固定的，
+所以得想办法根据需要把镜像文件进行扩容。
 
-Levels:
+扩容貌似很简单，但是真正做起来还是有些复杂的。
+
+而且整个过程需要非常小心，先做备份以免处理不当导致数据丢失。
+
+首先扩容镜像不是一步到位的，其中涉及了很多层，尤其是使用了
+[LVM](https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux))
+的情况。需要考虑以下几步：
 
 1. Image file
 2. LVM partition
-3. LVM physical volumn
-4. LVM logical volumn
+3. LVM physical volume
+4. LVM logical volume
 5. File system
 
-In case you are not using LVM, you can skip step 3 and 4.
+除了第一步，其余的步骤对于真实物理磁盘也是一样处理的。
+
+如果没有用到 LVM，3 和 4 可以跳过。
+
+这里以 QCOW2 格式为例，其它格式都应该是类似的。
 
 
 ## Resize the qcow2 image
@@ -140,11 +155,16 @@ Syncing disks.
 
 Reboot the virtual machine.
 
+
+## Resize the physical volume
+
 ```shell
 $ sudo pvdisplay
 $ sudo pvresize /dev/vda2
 $ sudo pvdisplay
 ```
+
+## Resize the logical volume
 
 ```shell
 $ sudo lvdisplay
@@ -152,8 +172,13 @@ $ sudo lvextend -L+960G /dev/centos/root
 $ sudo lvdisplay
 ```
 
+## Grow the file system
+
 Grow xfs partition.
 
 ```shell
 $ sudo xfs_growfs /dev/centos/root
 ```
+
+Different file system has different commands.
+Ext4 needs to use `resize2fs`.
