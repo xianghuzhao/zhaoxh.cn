@@ -1,11 +1,7 @@
 ---
-author: njutiger
-date: 2014-02-12 03:11:16+00:00
-draft: false
+date: 2014-02-12T03:11:16+00:00
 title: 需防范的各种攻击类型
-type: post
-categories:
-- Web
+tags: [CSRF, XSS]
 ---
 
 CSRF (Cross-site request forgery) 跨站请求伪造

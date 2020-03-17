@@ -1,11 +1,7 @@
 ---
-author: njutiger
-date: 2014-02-20 13:20:27+00:00
-draft: false
+date: 2014-02-20T13:20:27+00:00
 title: 需了解的东西
-type: post
-categories:
-- Web
+tags: [Ruby on Rails, Ruby]
 ---
 
 目前比较有用的：
@@ -42,5 +38,3 @@ categories:
   * [百度 PCS](http://developer.baidu.com/ms/pcs) 百度云网盘个人存储云服务
   * [mongodb](http://www.mongodb.org/) 分布式文档存储数据库
   * [Keepalived](http://www.keepalived.org/) 服务器健康状态检查
-
-

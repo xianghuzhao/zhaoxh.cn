@@ -1,11 +1,7 @@
 ---
-author: njutiger
-date: 2013-10-22 08:02:47+00:00
-draft: false
+date: 2013-10-22T08:02:47+00:00
 title: 开发板接线方法
-type: post
-categories:
-- STM32
+tags: [STM32]
 ---
 
 stm32f4 discovery board 与 PL2303 接线顺序：

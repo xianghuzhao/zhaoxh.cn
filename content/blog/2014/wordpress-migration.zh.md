@@ -1,11 +1,7 @@
 ---
-author: njutiger
-date: 2014-03-05 08:36:57+00:00
-draft: false
-title: wordpress 站点迁移
-type: post
-categories:
-- 未分类
+date: 2014-03-05T08:36:57+00:00
+title: WordPress 站点迁移
+tags: [WordPress, MySQL]
 ---
 
 ## 备份

@@ -1,13 +1,8 @@
 ---
-author: njutiger
-date: 2013-10-17 01:54:51+00:00
-draft: false
+date: 2013-10-17T01:54:51+00:00
 title: 无线平台的开发路线
-type: post
-categories:
-- STM32
+tags: [STM32]
 ---
-
 
 1. 实现有线网络芯片 enc28j60 的连接
 2. Lwip 裸机方式的移植 (enc28j60)
