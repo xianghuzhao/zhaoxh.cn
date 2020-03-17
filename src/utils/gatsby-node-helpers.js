@@ -5,6 +5,8 @@ const { isDefaultLocale, otherLocale } = require(`./locale`)
 exports.removeTrailingSlash = path =>
   path === `/` ? path : path.replace(/\/$/, ``)
 
+exports.addTrailingSlash = path => (path.slice(-1) === `/` ? path : path + `/`)
+
 // Modified from "gatsby-source-filesystem/create-file-path.js"
 const path = require(`path`)
 

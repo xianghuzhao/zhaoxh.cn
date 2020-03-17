@@ -88,6 +88,11 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        exclude: [`/resume`, `/en/resume`, `/en/404`, `/en/404.html`],
+      },
+    },
   ],
 }

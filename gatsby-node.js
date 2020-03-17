@@ -3,7 +3,7 @@ const path = require(`path`)
 const locales = require(`./src/locales/lang`)
 const { isDefaultLocale, otherLocale, tagPath } = require(`./src/utils/locale`)
 const {
-  removeTrailingSlash,
+  addTrailingSlash,
   generateNodeFields,
   generateSlug,
   addPost,
@@ -28,7 +28,7 @@ exports.onCreatePage = ({ page, actions }) => {
 
     return createPage({
       ...page,
-      path: removeTrailingSlash(localizedPath),
+      path: addTrailingSlash(localizedPath),
       context: {
         ...page.context,
         locale,

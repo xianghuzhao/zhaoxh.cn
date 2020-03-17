@@ -3,7 +3,7 @@ title: "QCOW2 格式兼容性"
 date: 2017-01-19T22:34:38+08:00
 tags: ['QCOW2', 'QEMU', 'Image Format', 'Virtual Machine']
 licensed: true
-draft: false
+draft: true
 ---
 
 Cut out summary from your post content here.
