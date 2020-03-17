@@ -1,0 +1,35 @@
+name: 'zhaoxh.cn Deployment'
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: setup_package
+      run: |
+        yarn install
+    - name: build_site
+      run: |
+        yarn build
+    - name: push_to_pages
+      run: |
+        rm -rf zhaoxh.cn-deploy
+        git clone ${{ secrets.ZHAOXH_CN_DEPLOY_REPO }} zhaoxh.cn-deploy
+        cd zhaoxh.cn-deploy
+        ls | grep -v 'README.md\|.git' | xargs rm -rf
+        cp -r ../public/* .
+        git status
+        git add .
+        git config --local user.name 'Xianghu Zhao'
+        git config --local user.email 'xianghuzhao@gmail.com'
+        git commit -m 'Update and deploy'
+        git push ${{ secrets.ZHAOXH_CN_DEPLOY_REPO }} master
