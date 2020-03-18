@@ -7,4 +7,7 @@ draft: true
 ---
 
 [Directed acyclic graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
-is commonly used as a dependency graph. 
+is commonly used as a dependency graph. It could be used to describe the
+dependencies of tasks.
+
+The vertex of DAG instance could be any hashable object.
