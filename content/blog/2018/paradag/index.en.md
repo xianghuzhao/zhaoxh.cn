@@ -10,4 +10,5 @@ draft: true
 is commonly used as a dependency graph. It could be used to describe the
 dependencies of tasks.
 
+First create a DAG, with each vertex representing a task.
 The vertex of DAG instance could be any hashable object.
