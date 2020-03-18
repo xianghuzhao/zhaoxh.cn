@@ -3,6 +3,7 @@ title: "Go 中使用 KDF 进行密码哈希和验证"
 tags:
   - Go
   - KDF
+  - KDFCrypt
   - Password Hashing
   - Password Verification
   - Cryptographic Salt
@@ -48,17 +49,17 @@ KDF (key derivation function，密钥派生函数) 可以通过特定算法
 * **HKDF**, [golang.org/x/crypto/hkdf](https://godoc.org/golang.org/x/crypto/hkdf)。
 
 
-## kdfcrypt
+## KDFCrypt
 
 直接使用 `golang.org/x/crypto` 还不算特别方便，
 用于密码验证还需要额外做些处理，比如生成随机盐值
 (salt)，保存盐值和参数。
 
 于是我写了
-[kdfcrypt](https://github.com/xianghuzhao/kdfcrypt)
+[KDFCrypt](https://github.com/xianghuzhao/kdfcrypt)
 这个包用于简化密码哈希和验证的过程。
 
-`kdfcrypt` 主要提供了不同 KDF 用于密码哈希和验证的 Go 通用接口。
+KDFCrypt 主要提供了不同 KDF 用于密码哈希和验证的 Go 通用接口。
 这是一个简单的例子：
 
 ```go
@@ -86,7 +87,7 @@ func main() {
 }
 ```
 
-`kdfcrypt` 包含两个重要的函数 `Encode` 和 `Verify`。
+KDFCrypt 包含两个重要的函数 `Encode` 和 `Verify`。
 `Encode` 根据指定参数生成一个编码后的字符串，字符串的形式为：
 
 ```

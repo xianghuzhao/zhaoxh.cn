@@ -3,6 +3,7 @@ title: "Password Hashing and Verification with KDF in Go"
 tags:
   - Go
   - KDF
+  - KDFCrypt
   - Password Hashing
   - Password Verification
   - Cryptographic Salt
@@ -53,17 +54,17 @@ which includes some common KDFs:
 * **HKDF**, [golang.org/x/crypto/hkdf](https://godoc.org/golang.org/x/crypto/hkdf).
 
 
-## kdfcrypt package
+## KDFCrypt package
 
 It is not very convenient to use `golang.org/x/crypto` directly.
 Some extra works are needed, like generation of random salt, preserving
 salt and parameters, etc.
 
-[kdfcrypt](https://github.com/xianghuzhao/kdfcrypt)
+[KDFCrypt](https://github.com/xianghuzhao/kdfcrypt)
 package is thus created to simplify the process of password
 hashing and verification.
 
-`kdfcrypt` provides the common interface for various KDFs to do
+KDFCrypt provides the common interface for various KDFs to do
 password hashing and verification.
 Here is a simple example:
 
@@ -92,7 +93,7 @@ func main() {
 }
 ```
 
-`kdfcrypt` defines two functions `Encode` and `Verify`.
+KDFCrypt defines two functions `Encode` and `Verify`.
 `Encode` could generate an encoded string according to the parameters.
 The encoded string looks like:
 
