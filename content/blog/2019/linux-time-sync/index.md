@@ -43,7 +43,7 @@ $ sudo timedatectl set-ntp true
 ```
 
 ```
-$ timedatectl                                                                                                                                                                                                                                           [2020/03/13 15:09:05]
+$ timedatectl
                Local time: Fri 2019-02-13 15:09:25 CST
            Universal time: Fri 2019-02-13 07:09:25 UTC
                  RTC time: Fri 2019-02-13 07:09:26

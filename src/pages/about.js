@@ -9,9 +9,9 @@ const AboutPage = ({ pageContext: { locale, otherSlug } }) => {
   return (
     <Layout locale={locale} otherLink={otherSlug}>
       <SEO title={messages[locale].about} />
-      <Title title={messages[locale].about} />
+      <Title title={messages[locale].aboutTitle} />
       <section>
-        <p>About me.</p>
+        <p>{messages[locale].aboutPart1}</p>
         <p>
           {messages[locale].builtWith}
           {` `}

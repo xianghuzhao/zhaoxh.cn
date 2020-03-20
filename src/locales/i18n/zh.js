@@ -18,4 +18,6 @@ module.exports = {
   builtWithEnd: "创建",
   allPosts: "所有文章",
   tagList: "标签列表",
+  aboutTitle: "关于虎泉笔谈",
+  aboutPart1: "虎泉笔谈",
 }

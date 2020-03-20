@@ -18,4 +18,6 @@ module.exports = {
   builtWithEnd: "",
   allPosts: "All Posts",
   tagList: "Tag List",
+  aboutTitle: "About Xianghu's Blog",
+  aboutPart1: "Xianghu's Blog",
 }
