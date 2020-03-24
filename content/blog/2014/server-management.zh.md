@@ -1,8 +1,8 @@
 ---
 title: 服务器管理
 date: 2014-01-06T16:51:46+00:00
-tags: [Debian, Server, Locale, Timezone, NTP, PPTP, Ruby on Rails,
-    Ruby, nginx, Passenger]
+tags: [Debian, Server Management, Locale, Timezone, NTP, PPTP,
+    Ruby on Rails, Ruby, nginx, Passenger]
 draft: false
 ---
 

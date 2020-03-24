@@ -1,6 +1,6 @@
 ---
 title: "FreeBSD 配置"
-tags: [FreeBSD, NTP, Server]
+tags: [FreeBSD, NTP, Server Management]
 date: 2017-12-23T18:55:29+08:00
 ---
 
