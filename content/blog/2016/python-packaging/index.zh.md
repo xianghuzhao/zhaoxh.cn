@@ -91,7 +91,7 @@ include package-name/VERSION
 ## 安装工具
 
 ```shell
-$ pip install whell
+$ pip install wheel
 ```
 
 ```shell

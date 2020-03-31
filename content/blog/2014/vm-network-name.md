@@ -2,6 +2,7 @@
 date: 2014-07-02T01:25:52+08:00
 title: 防止虚拟机 Network Interface 名称变化
 tags: ['Virtual Machine', CentOS, Network Interface]
+licensed: true
 ---
 
 由镜像创建的虚拟机，由于硬件相当于发生了改变，所以会导致网卡接口名称发生变化。

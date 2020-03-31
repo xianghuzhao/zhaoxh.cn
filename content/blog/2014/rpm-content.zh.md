@@ -2,6 +2,7 @@
 date: 2014-12-15T05:19:16+08:00
 title: rpm 内容查看
 tags: [RPM]
+licensed: true
 ---
 
 如何查看 rpm 包的内容。

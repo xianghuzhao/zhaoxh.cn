@@ -1,7 +1,8 @@
 ---
-date: 2014-03-05T08:36:57+00:00
+date: 2014-03-05T16:36:57+08:00
 title: WordPress 站点迁移
 tags: [WordPress, MySQL]
+licensed: true
 ---
 
 ## 备份

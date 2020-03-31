@@ -2,6 +2,7 @@
 title: PPTP 服务安装配置
 date: 2014-01-14 01:12:00+00:00
 tags: [PPTP, Debian, NAT, iptables]
+licensed: true
 ---
 
 ### 安装配置 pptpd

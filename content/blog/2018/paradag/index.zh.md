@@ -72,7 +72,7 @@ executor 用于处理每个顶点的任务执行。
 
 ```python
 from paradag import dag_run
-from paradag.sequential_processor import SequentialProcessor
+from paradag import SequentialProcessor
 
 class CustomExecutor:
     def param(self, vertex):
@@ -93,7 +93,7 @@ print(dag_run(dag, processor=SequentialProcessor(), executor=CustomExecutor()))
 `MultiThreadProcessor` 就可以了。
 
 ```python
-from paradag.multi_thread_processor import MultiThreadProcessor
+from paradag import MultiThreadProcessor
 
 dag_run(dag, processor=MultiThreadProcessor(), executor=CustomExecutor())
 ```
