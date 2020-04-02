@@ -66,7 +66,7 @@ includes the following components:
 1. `trigger`: defines when to start the workflow, like fixed time, HTTP
    requests reception.
 2. `selector`: defines whether to proceed for job execution, which
-   depends on `trigger` and `job` parameters.
+   depends on `trigger` and `select` parameters.
 3. `executor`: defines how to execute the job, which accepts
    `trigger` and `job` parameters.
 4. `router`: connects all the components above, and defines a complete task.
@@ -97,20 +97,21 @@ It is not necessary to write configuration for all components.
 They could be specified by the `type` name in `router` directly,
 which will use their default parameters.
 
-Here is the structure of `router` configuration. All extra parameters
-are considered as `job` parameters and passed to `selector` and
-`executor`.
+Here is the structure of `router` configuration. `select_param`
+will be passed to `selector` and `job_param` to `executor`.
 
 ```yaml
 router:
   router_name:
     trigger: trigger_name
     selector: selector_name
-    job:
-      job_name: executor_name
-
-    param1: value1
-    param2: value2
+    task:
+      task_name: executor_name
+    select_param:
+      param1: value1
+    job_param:
+      param2: value2
+      param3: value3
 ```
 
 
@@ -131,13 +132,13 @@ router:
   print_param_every2s:
     trigger: every2s
     selector: all
-    job:
+    task:
       print_param: print
 ```
 
 In this example, the trigger `every2s` will be active every 2 seconds.
 The router `print_param_every2s` will receive the trigger.
-Then the selector `all` will decide whether or not to execute job
+Then the selector `all` will decide whether or not to execute task
 `print_param`.
 If the selector allows to continue, then the job parameters will be
 passed to executor `print` and do the execution.
@@ -167,17 +168,20 @@ router:
   uptime_wednesday_morning:
     trigger: wednesday_morning
     selector: all
-    job:
+    task:
       run_local: local_command
-    cmd: uptime
+    job_param:
+      cmd: uptime
   print_result:
     trigger: exe_done
     selector: match_map
-    job:
+    task:
       print_result: print
-    match_key: router
-    match_value: uptime_wednesday_morning
-    print_key: trigger_param/result
+    select_param:
+      match_key: router
+      match_value: uptime_wednesday_morning
+    job_param:
+      print_key: trigger_param/result
 ```
 
 This example defines the executor `local_command` with type `local`.
@@ -229,28 +233,29 @@ router:
   run_git_script:
     trigger: wednesday_morning
     selector: all
-    job:
+    task:
       run_git: local_command
-    script_repo: https://github.com/heraldgo/demo-script.git
-    cmd: run/backup.sh
-    param_arg: true
+    job_param:
+      repo: https://github.com/heraldgo/demo-script.git
+      cmd: run/backup.sh
   print_result:
     trigger: exe_done
     selector: match_map
-    job:
+    task:
       print_result: print
-    match_key: executor
-    match_value: local_command
-    print_key: trigger_param/result
+    select_param:
+      match_key: executor
+      match_value: local_command
+    job_param:
+      print_key: trigger_param/result
 ```
 
-The `local` executor will pull the `script_repo` to the directory
+The `local` executor will pull the `repo` to the directory
 `<work_dir>/gitrepo`, and then run the scripts specified by `cmd`.
 Any executable file in the Git repository could be set as `cmd`,
 so there is no restriction on the script language.
-Set `param_arg` to `true` if case job parameters are required,
-then all parameters of executor will be passed as the last argument
-to the command in `json` form.
+All parameters of executor will be passed as the environment variable
+`HERALD_EXECUTE_PARAM` in `json` format to the command.
 
 The standard output of the command will be returned to Herald Daemon.
 In case the output could be converted to `json`, it will
@@ -329,19 +334,21 @@ router:
   run_git_script:
     trigger: wednesday_morning
     selector: all
-    job:
+    task:
       run_git: remote_command
-    script_repo: https://github.com/heraldgo/demo-script.git
-    cmd: run/backup.sh
-    param_arg: true
+    job_param:
+      repo: https://github.com/heraldgo/demo-script.git
+      cmd: run/backup.sh
   print_result:
     trigger: exe_done
     selector: except_map
-    job:
+    task:
       print_result: print
-    except_key: router
-    except_value: print_result
-    print_key: trigger_param/result
+    select_param:
+      except_key: router
+      except_value: print_result
+    job_param:
+      print_key: trigger_param/result
 ```
 
 `host` specifies the remote URL of Herald Runner.
@@ -416,28 +423,33 @@ router:
   manual_command:
     trigger: manual
     selector: match_map
-    job:
+    task:
       run_command: local_command
-    match_key: command
-    match_value: uptime
-    cmd: uptime
+    select_param:
+      match_key: command
+      match_value: uptime
+    job_param:
+      cmd: uptime
   manual_backup:
     trigger: manual
     selector: match_map
-    job:
+    task:
       backup_db: local_command
-    match_key: backup
-    script_repo: https://github.com/heraldgo/demo-script.git
-    cmd: run/backup.sh
-    param_arg: true
+    select_param:
+      match_key: backup
+    job_param:
+      repo: https://github.com/heraldgo/demo-script.git
+      cmd: run/backup.sh
   print_result:
     trigger: exe_done
     selector: except_map
-    job:
+    task:
       print_result: print
-    except_key: router
-    except_value: print_result
-    print_key: trigger_param/result
+    select_param:
+      except_key: router
+      except_value: print_result
+    job_param:
+      print_key: trigger_param/result
 ```
 
 The jobs could be triggered with HTTP POST request.

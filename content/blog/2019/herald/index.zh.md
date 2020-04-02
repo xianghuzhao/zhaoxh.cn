@@ -56,7 +56,7 @@ $ heraldd -config config.yml
 
 1. `trigger`: 定义事件触发器，比如定时事件，或者 HTTP 请求触发等等。
 2. `selector`: 定义事件过滤器，只通过特定的触发事件，
-   是否通过由 `trigger` 和 `job` 参数决定。
+   是否通过由 `trigger` 和 `select` 参数决定。
 3. `executor`: 决定任务如何执行，接收 `trigger` 和 `job` 的参数。
 4. `router`: 将以上组件串联起来，定义一个完整的任务流程。
 
@@ -84,19 +84,21 @@ selector:
 不是所有组件都需要配置，没有配置的可以在 `router` 中直接指定
 `type` 作为名字并且使用默认参数。
 
-`router` 的配置结构如下，额外参数直接作为 `job` 参数传递给 `selector`
-和 `executor`：
+`router` 的配置结构如下，`select_param` 参数传递给 `selector`，
+`job_param` 参数会传给 `executor`。
 
 ```yaml
 router:
   router_name:
     trigger: trigger_name
     selector: selector_name
-    job:
-      job_name: executor_name
-
-    param1: value1
-    param2: value2
+    task:
+      task_name: executor_name
+    select_param:
+      param1: value1
+    job_param:
+      param2: value2
+      param3: value3
 ```
 
 
@@ -115,13 +117,13 @@ router:
   print_param_every2s:
     trigger: every2s
     selector: all
-    job:
+    task:
       print_param: print
 ```
 
 这个例子里定义了一个每隔两秒触发一次的 trigger `every2s`，
 而 router `print_param_every2s` 负责接收这个触发，
-并且通过 selector `all` 判断是否执行 job `print_param`，
+并且通过 selector `all` 判断是否执行 task `print_param`，
 如果通过判定则将参数传递给 executor `print` 执行。
 
 总体效果就是每隔 2 秒会在屏幕上打印一串参数。
@@ -147,17 +149,20 @@ router:
   uptime_wednesday_morning:
     trigger: wednesday_morning
     selector: all
-    job:
+    task:
       run_local: local_command
-    cmd: uptime
+    job_param:
+      cmd: uptime
   print_result:
     trigger: exe_done
     selector: match_map
-    job:
+    task:
       print_result: print
-    match_key: router
-    match_value: uptime_wednesday_morning
-    print_key: trigger_param/result
+    select_param:
+      match_key: router
+      match_value: uptime_wednesday_morning
+    job_param:
+      print_key: trigger_param/result
 ```
 
 这里定义了一个 executor `local_command`，需要指定一个 `work_dir`，
@@ -201,26 +206,28 @@ router:
   run_git_script:
     trigger: wednesday_morning
     selector: all
-    job:
+    task:
       run_git: local_command
-    script_repo: https://github.com/heraldgo/demo-script.git
-    cmd: run/backup.sh
-    param_arg: true
+    job_param:
+      repo: https://github.com/heraldgo/demo-script.git
+      cmd: run/backup.sh
   print_result:
     trigger: exe_done
     selector: match_map
-    job:
+    task:
       print_result: print
-    match_key: executor
-    match_value: local_command
-    print_key: trigger_param/result
+    select_param:
+      match_key: executor
+      match_value: local_command
+    job_param:
+      print_key: trigger_param/result
 ```
 
-`local` executor 会自动将 `script_repo` 指定的 Git 仓库拉取到本地目录
+`local` executor 会自动将 `repo` 指定的 Git 仓库拉取到本地目录
 `<work_dir>/gitrepo` 下面，然后执行 `cmd` 对应的脚本命令。
 只要是 Git 仓库中的可执行文件，都可以运行，所以对脚本语言并没有限制。
-如果需要读取参数，可以设置 `param_arg` 为 `true`，这样所有 executor 参数
-会以 `json` 形式作为最后一个参数传递给脚本。
+所有 executor 参数都通过环境变量 `HERALD_EXECUTE_PARAM` 以 `json`
+格式传递给命令。
 
 脚本标准输出的内容是会作为结果返回给 Herald Daemon 的，所以尽量避免输出
 大量信息。输出的内容如果可以转换为 `json`，则会作为 `json` 格式与结果
@@ -296,19 +303,21 @@ router:
   run_git_script:
     trigger: wednesday_morning
     selector: all
-    job:
+    task:
       run_git: remote_command
-    script_repo: https://github.com/heraldgo/demo-script.git
-    cmd: run/backup.sh
-    param_arg: true
+    job_param:
+      repo: https://github.com/heraldgo/demo-script.git
+      cmd: run/backup.sh
   print_result:
     trigger: exe_done
     selector: except_map
-    job:
+    task:
       print_result: print
-    except_key: router
-    except_value: print_result
-    print_key: trigger_param/result
+    select_param:
+      except_key: router
+      except_value: print_result
+    job_param:
+      print_key: trigger_param/result
 ```
 
 `host` 指定的是远程地址，也就是 Herald Runner 服务的地址，
@@ -375,28 +384,33 @@ router:
   manual_command:
     trigger: manual
     selector: match_map
-    job:
+    task:
       run_command: local_command
-    match_key: command
-    match_value: uptime
-    cmd: uptime
+    select_param:
+      match_key: command
+      match_value: uptime
+    job_param:
+      cmd: uptime
   manual_backup:
     trigger: manual
     selector: match_map
-    job:
+    task:
       backup_db: local_command
-    match_key: backup
-    script_repo: https://github.com/heraldgo/demo-script.git
-    cmd: run/backup.sh
-    param_arg: true
+    select_param:
+      match_key: backup
+    job_param:
+      repo: https://github.com/heraldgo/demo-script.git
+      cmd: run/backup.sh
   print_result:
     trigger: exe_done
     selector: except_map
-    job:
+    task:
       print_result: print
-    except_key: router
-    except_value: print_result
-    print_key: trigger_param/result
+    select_param:
+      except_key: router
+      except_value: print_result
+    job_param:
+      print_key: trigger_param/result
 ```
 
 通过 HTTP 请求可以触发对应的任务，请求必须是 `json` 格式，

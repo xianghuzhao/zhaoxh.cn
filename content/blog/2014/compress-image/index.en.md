@@ -3,7 +3,7 @@ title: "Compress QCOW2 Image"
 tags: [QCOW2, QEMU, 'Image Format', 'Virtual Machine']
 date: 2014-08-11T22:11:45+08:00
 licensed: true
-draft: false
+draft: true
 ---
 
 The size of the cloud image should be controlled.
