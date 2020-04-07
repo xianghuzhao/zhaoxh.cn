@@ -9,8 +9,8 @@ draft: false
 [有向无环图 (Directed acyclic graph, DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
 通常被用作依赖关系图，可以用于描述任务运行之间的依赖关系。
 
-任务执行顺序必须遵守 DAG 依赖关系。任务之间如果有直接或者间接的依赖，
-则必须依次执行，如果任务之间不存在依赖则可以并行执行。
+任务执行顺序必须遵守 DAG
+依赖关系。任务之间如果有直接或者间接的依赖，则必须依次执行，如果任务之间不存在依赖则可以并行执行。
 
 我经常在 Python 下遇到类似的问题，于是写了
 [paradag](https://github.com/xianghuzhao/paradag)
@@ -26,10 +26,9 @@ $ pip install paradag
 
 ## 创建 DAG
 
-开始运行任务之前，先要创建描述任务依赖关系的 DAG，DAG 中的每个顶点
-代表一个任务。DAG 顶点的值可以是任意
-[可哈希 (hashable) 对象](https://docs.python.org/3/glossary.html#term-hashable)，比如
-整数，字符串，包含可哈希对象的元组，用户定义类的实例等等。
+开始运行任务之前，先要创建描述任务依赖关系的 DAG，DAG
+中的每个顶点代表一个任务。DAG
+顶点的值可以是任意[可哈希 (hashable) 对象](https://docs.python.org/3/glossary.html#term-hashable)，比如整数，字符串，包含可哈希对象的元组，用户定义类的实例等等。
 
 ```python
 from paradag import DAG
@@ -47,9 +46,8 @@ dag.add_edge(123, 'abcde')                  # 123 -> 'abcde'
 dag.add_edge('abcde', ('a', 'b', 3), vtx)   # 'abcde' -> ('a', 'b', 3), 'abcde' -> vtx
 ```
 
-`add_edge` 用于创建描述依赖关系的有向边，第一个参数为起点，
-剩余参数为终点，可以同时创建多个边。
-创建边时需要注意不要形成环，那样会导致触发 `DAGCycleError` 异常。
+`add_edge` 用于创建描述依赖关系的有向边，第一个参数为起点，剩余参数为终点，可以同时创建多个边。创建边时需要注意不要形成环，那样会导致触发
+`DAGCycleError` 异常。
 
 以下是常用的 DAG 属性：
 
@@ -67,8 +65,8 @@ print(dag.all_terminals())
 
 ## 串行执行任务
 
-任务执行需要提供一个 executor，以及可选的 selector。
-executor 用于处理每个顶点的任务执行。
+任务执行需要提供一个 executor，以及可选的 selector。executor
+用于处理每个顶点的任务执行。
 
 ```python
 from paradag import dag_run
@@ -98,9 +96,9 @@ from paradag import MultiThreadProcessor
 dag_run(dag, processor=MultiThreadProcessor(), executor=CustomExecutor())
 ```
 
-默认的 selector 是 `FullSelector`，它会尝试把尽可能多可以并行的任务
-全部交给 processor 执行。如果希望能够控制具体的执行过程，可以自己写
-一个 selector。下面这个 selector 最多只允许 4 个任务同时并行运行。
+默认的 selector 是 `FullSelector`，它会尝试把尽可能多可以并行的任务全部交给
+processor 执行。如果希望能够控制具体的执行过程，可以自己写一个
+selector。下面这个 selector 最多只允许 4 个任务同时并行运行。
 
 ```python
 class CustomSelector(object):
@@ -111,10 +109,10 @@ class CustomSelector(object):
 dag_run(dag, processor=MultiThreadProcessor(), selector=CustomSelector(), executor=CustomExecutor())
 ```
 
-一旦使用 `MultiThreadProcessor`，就必须要注意并行任务的安全
-问题。executor 中只有 `execute` 函数是会并行运行的，其它函数都在
-主线程内执行。所以在 `execute` 函数内尽可能不要去修改函数外的变量，
-所有的参数都通过 `param` 传递，而 `param` 函数所返回的用于 `execute`
+一旦使用 `MultiThreadProcessor`，就必须要注意并行任务的安全问题。executor
+中只有 `execute` 函数是会并行运行的，其它函数都在主线程内执行。所以在
+`execute` 函数内尽可能不要去修改函数外的变量，所有的参数都通过
+`param` 传递，而 `param` 函数所返回的用于 `execute`
 函数的参数也尽可能保证相互独立。
 
 
@@ -172,9 +170,8 @@ class CustomExecutor:
 
 ## 拓扑排序
 
-[拓扑排序](https://en.wikipedia.org/wiki/Topological_sorting)
-也可以通过 `paradag.dag_run` 函数实现。
-`dag_run` 函数的返回值就可以看作是拓扑排序的结果。
+[拓扑排序](https://en.wikipedia.org/wiki/Topological_sorting)也可以通过
+`paradag.dag_run` 函数实现。`dag_run` 函数的返回值就可以看作是拓扑排序的结果。
 
 仅仅得到拓扑排序的结果而不执行任务：
 

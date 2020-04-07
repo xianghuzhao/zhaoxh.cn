@@ -236,7 +236,7 @@ router:
     task:
       run_git: local_command
     job_param:
-      repo: https://github.com/heraldgo/demo-script.git
+      git_repo: https://github.com/heraldgo/demo-script.git
       cmd: run/backup.sh
   print_result:
     trigger: exe_done
@@ -250,7 +250,7 @@ router:
       print_key: trigger_param/result
 ```
 
-The `local` executor will pull the `repo` to the directory
+The `local` executor will pull the `git_repo` to the directory
 `<work_dir>/gitrepo`, and then run the scripts specified by `cmd`.
 Any executable file in the Git repository could be set as `cmd`,
 so there is no restriction on the script language.
@@ -337,7 +337,7 @@ router:
     task:
       run_git: remote_command
     job_param:
-      repo: https://github.com/heraldgo/demo-script.git
+      git_repo: https://github.com/heraldgo/demo-script.git
       cmd: run/backup.sh
   print_result:
     trigger: exe_done
@@ -438,7 +438,7 @@ router:
     select_param:
       match_key: backup
     job_param:
-      repo: https://github.com/heraldgo/demo-script.git
+      git_repo: https://github.com/heraldgo/demo-script.git
       cmd: run/backup.sh
   print_result:
     trigger: exe_done

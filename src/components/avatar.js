@@ -41,7 +41,7 @@ class Avatar extends React.Component {
   }
 
   onDragImage = event => {
-    if (this.eventCounter === 2) {
+    if (this.eventCounter === 9) {
       this.setState({ allowClick: true })
     }
     this.eventCounter++

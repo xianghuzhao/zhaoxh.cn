@@ -9,19 +9,18 @@ draft: false
 [NTP (Network Time Protocol)](https://en.wikipedia.org/wiki/Network_Time_Protocol)
 是目前广泛使用的时间同步协议。
 
-以下介绍的几种 NTP 工具是相互排斥，不能同时运行的。
-根据自己的需要选取一种即可。
+以下介绍的几种 NTP 工具是相互排斥，不能同时运行的。根据自己的需要选取一种即可。
 
 
 ## systemd-timesyncd
 
 [systemd-timesyncd](https://www.freedesktop.org/software/systemd/man/systemd-timesyncd.service.html)
 是 `systemd` 自带的时间同步服务。`systemd-timesyncd` 只实现了
-[SNTP](https://tools.ietf.org/html/rfc4330) 客户端。
-SNTP 是一个简化版的 NTP 协议，且 `systemd-timesyncd` 不提供 NTP 服务功能。
+[SNTP](https://tools.ietf.org/html/rfc4330) 客户端。SNTP
+是一个简化版的 NTP 协议，且 `systemd-timesyncd` 不提供 NTP 服务功能。
 
-通常在不需要使用 NTP 服务的情况，`systemd-timesyncd` 完全可以满足要求，
-它跟随 `systemd` 一起安装，配置也简单。
+通常在不需要使用 NTP 服务的情况，`systemd-timesyncd`
+完全可以满足要求，它跟随 `systemd` 一起安装，配置也简单。
 
 使用 `timedatectl` 命令查看 NTP 状态：
 
@@ -81,8 +80,8 @@ Root distance: 26.595ms (max: 5s)
 
 ## NTP daemon
 
-[NTP daemon](http://www.ntp.org/) 是 NTP 的官方参考实现，
-长期以来一直作为 Linux 发行版默认的 NTP 服务。
+[NTP daemon](http://www.ntp.org/) 是 NTP
+的官方参考实现，长期以来一直作为 Linux 发行版默认的 NTP 服务。
 
 禁用 `systemd-timesyncd` 以避免冲突：
 
@@ -121,8 +120,8 @@ $ ntpq -p
 
 ## chrony
 
-[chrony](https://chrony.tuxfamily.org/) 是 NTP 的另一种实现。
-在 CentOS 7 里，`chrony` 已经替代 `NTP daemon` 成为默认的 NTP 服务。
+[chrony](https://chrony.tuxfamily.org/) 是 NTP 的另一种实现。在
+CentOS 7 里，`chrony` 已经替代 `NTP daemon` 成为默认的 NTP 服务。
 
 同样需要先禁用 `systemd-timesyncd`：
 

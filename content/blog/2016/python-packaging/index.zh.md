@@ -6,7 +6,7 @@ licensed: true
 draft: false
 ---
 
-将 Python 程序发布到
+Python 程序可以发布到
 [PyPI](https://pypi.org/)
 上，以便能够方便共享。
 

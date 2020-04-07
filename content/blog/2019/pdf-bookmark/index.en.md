@@ -139,16 +139,16 @@ With these inline commands, you do not need to recalculate the index number for 
 
 Here are all supported inline commands:
 
-1. `new_index`. Default: 1.
+1. `new_index`. Default: `1`.
    The following bookmark index will be recalculated from
    the new index number (`new_index + page - 1`).
-2. `num_start`. Default: 1.
+2. `num_start`. Default: `1`.
    Specify the number of first page if it does not start from 1 (`new_index + page - num_start`).
 3. `num_style`. Default: `Arabic`.
    The page number style. Could be `Arabic`, `Roman` and `Letters`.
-4. `collapse_level`. Default: 0.
+4. `collapse_level`. Default: `0`.
    On which level the bookmarks are collapsed. 0 means expanding all.
-5. `level_indent`. Default: 2.
+5. `level_indent`. Default: `2`.
    Number of indentation spaces for a new level.
 
 

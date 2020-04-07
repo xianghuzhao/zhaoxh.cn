@@ -8,9 +8,9 @@ description: Linux 下非常适合进行软件开发，软件开发环境的创�
 
 Linux 下非常适合进行软件开发，软件开发环境的创建也是非常方便。
 
-这里的开发环境指的是 `C/C++` 开发环境，
-包含 `C/C++` 编译器、头文件、标准库、代码工具、编译工具以及常用开发库等等。
-其他语言 (比如 `Ruby`、`Go`、`JavaScript` 等等)
+这里的开发环境指的是 `C/C++` 开发环境，包含 `C/C++`
+编译器、头文件、标准库、代码工具、编译工具以及常用开发库等等。其他语言
+(比如 `Ruby`、`Go`、`JavaScript` 等等)
 的开发环境还是需要单独安装的。
 
 以下方法可以快速建立软件开发环境。
@@ -18,8 +18,7 @@ Linux 下非常适合进行软件开发，软件开发环境的创建也是非�
 
 ## 安装比较完整的开发环境
 
-不同 `Linux` 发行版的安装包名称并不一样，命令不同，
-而且所包含的具体组件也不完全相同。
+不同 `Linux` 发行版的安装包名称并不一样，命令不同，而且所包含的具体组件也不完全相同。
 
 ### Arch
 
@@ -46,8 +45,8 @@ sudo apt-get install build-essential
 sudo yum groupinstall "Development Tools"
 ```
 
-如果想知道 "Development Tools" 这个 group 里面都包含了什么，
-可以使用 `group info` 命令查看：
+如果想知道 "Development Tools" 这个 group
+里面都包含了什么，可以使用 `group info` 命令查看：
 
 ```bash
 yum groupinfo "Development Tools"
@@ -68,8 +67,8 @@ sudo yum groupinstall "Development Tools"
 
 ## 单独安装软件包
 
-上面的方法命令简单，不过也可能多安装了很多不需要的东西。
-如果只是希望建立最基本的 `C/C++` 编译环境，可以只安装 `gcc/g++`，以及
+上面的方法命令简单，不过也可能多安装了很多不需要的东西。如果只是希望建立最基本的
+`C/C++` 编译环境，可以只安装 `gcc/g++`，以及
 [`GNU make`](https://www.gnu.org/software/make/)，其他工具可以根据情况自由添加。
 
 ### Arch

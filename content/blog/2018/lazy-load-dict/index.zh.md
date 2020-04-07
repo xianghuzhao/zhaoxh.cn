@@ -7,10 +7,8 @@ draft: false
 ---
 
 [延迟加载 (lazy loading)](https://en.wikipedia.org/wiki/Lazy_loading)
-是一种仅在资源第一次调用时才进行真正加载的模式。
-资源加载通常会涉及到较慢的 I/O 操作，并且会占用内存，
-因此合理使用延迟加载可以有效地节约初始化时间和内存消耗，
-特别是在资源并不是每次都会全部用到的情况。
+是一种仅在资源第一次调用时才进行真正加载的模式。资源加载通常会涉及到较慢的
+I/O 操作，并且会占用内存，因此合理使用延迟加载可以有效地节约初始化时间和内存消耗，特别是在资源并不是每次都会全部用到的情况。
 
 本文将讨论在 Python 中实现延迟加载的一些思路。
 
@@ -127,6 +125,5 @@ print(lazy3['first'])
 print(lazy3['second'])
 ```
 
-上面这个对象不能直接修改内容，因此可以保护内容完整性。
-如果希望允许修改，可以把 `Mapping` 改为
+上面这个对象不能直接修改内容，因此可以保护内容完整性。如果希望允许修改，可以把 `Mapping` 改为
 [`MutableMapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping)。
