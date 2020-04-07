@@ -2,9 +2,14 @@ import React from "react"
 import Link from "gatsby-link"
 import styled from "styled-components"
 
+import { config } from "@fortawesome/fontawesome-svg-core"
+import "@fortawesome/fontawesome-svg-core/styles.css"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons"
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
+
+config.autoAddCss = false
 
 const PagiContainer = styled.div`
   margin-top: 20px;

@@ -2,6 +2,9 @@ import React from "react"
 import Link from "gatsby-link"
 import styled from "styled-components"
 
+import { config } from "@fortawesome/fontawesome-svg-core"
+import "@fortawesome/fontawesome-svg-core/styles.css"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
@@ -11,6 +14,8 @@ import { faWeixin } from "@fortawesome/free-brands-svg-icons"
 import messages from "../locales/messages"
 import { otherLocale, localeUrl } from "../utils/locale"
 import Avatar from "./avatar"
+
+config.autoAddCss = false
 
 const SidebarStyled = styled.div`
   position: fixed;
