@@ -64,7 +64,7 @@ $ gcc -Wl,-rpath,'$ORIGIN/../lib'
     └── bar2.c
 ```
 
-`bar1.c` 内容：
+`bar1.c`：
 
 ```c
 int lib1(void) {
@@ -72,7 +72,7 @@ int lib1(void) {
 }
 ```
 
-`bar2.c` 内容：
+`bar2.c`：
 
 ```c
 int lib2(void) {
@@ -80,7 +80,7 @@ int lib2(void) {
 }
 ```
 
-`foo.c` 内容：
+`foo.c`：
 
 ```c
 #include <stdio.h>
@@ -164,16 +164,18 @@ $ LD_LIBRARY_PATH=../lib ldd foo
 $ gcc -L../lib -Wl,-rpath='$ORIGIN/../lib',--enable-new-dtags -o foo foo.c -lbar1 -lbar2
 ```
 
-或者使用 `RUNPATH`：
+或者使用 `RPATH`：
 
 ```shell
 $ gcc -L../lib -Wl,-rpath='$ORIGIN/../lib',--disable-new-dtags -o foo foo.c -lbar1 -lbar2
 ```
 
-`ld` 默认使用 `--disable-new-dtags`，也就是不设置 `RUNPATH`，参见
-<https://sourceware.org/binutils/docs/ld/Options.html>。但是较新版本的
+`ld` 默认使用 `--disable-new-dtags`，也就是只设置 `RPATH`
+而不设置 `RUNPATH` (参见
+<https://sourceware.org/binutils/docs/ld/Options.html>)。但是较新版本的
 `Debian`，`Ubuntu` 和 `Gentoo` 修改了这一默认行为，也就是默认使用
-`--enable-new-dtags`，所以为了不造成困惑，还是把选项加上比较好。
+`--enable-new-dtags`，也就是
+`RUNPATH`。所以为了不造成混淆和歧义，还是把选项明确加上比较好。
 
 由于这里使用了 `$ORIGIN`，所以不管当前目录在哪里，都可以正常运行 `foo`。
 
