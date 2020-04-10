@@ -170,11 +170,11 @@ $ gcc -L../lib -Wl,-rpath='$ORIGIN/../lib',--enable-new-dtags -o foo foo.c -lbar
 $ gcc -L../lib -Wl,-rpath='$ORIGIN/../lib',--disable-new-dtags -o foo foo.c -lbar1 -lbar2
 ```
 
-`ld` 默认使用 `--disable-new-dtags`，也就是只设置 `RPATH`
+`ld` 默认使用 `--disable-new-dtags`，只设置 `RPATH`
 而不设置 `RUNPATH` (参见
 <https://sourceware.org/binutils/docs/ld/Options.html>)。但是较新版本的
-`Debian`，`Ubuntu` 和 `Gentoo` 修改了这一默认行为，也就是默认使用
-`--enable-new-dtags`，也就是
+`Debian`，`Ubuntu` 和 `Gentoo` 修改了这一默认行为，默认使用
+`--enable-new-dtags`，也就是设置
 `RUNPATH`。所以为了不造成混淆和歧义，还是把选项明确加上比较好。
 
 由于这里使用了 `$ORIGIN`，所以不管当前目录在哪里，都可以正常运行 `foo`。
@@ -214,7 +214,7 @@ $ sudo pacman -S binutils
 $ sudo pacman -S patchelf
 ```
 
-默认会修改 `RUNPATH`：
+默认会设置 `RUNPATH`：
 
 ```shell
 $ patchelf --set-rpath '$ORIGIN/../lib' foo
