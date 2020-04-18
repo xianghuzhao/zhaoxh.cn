@@ -2,6 +2,7 @@
 title: Python 中创建类的别名
 date: 2016-12-18T12:42:19+08:00
 tags: [Python, Class Alias, Class Variable]
+description: '在某些情况下，我们需要给一个 Python 类起个别名，但是肯定不会想要复制一遍类的代码。这里讨论一下实现别名的一些办法，各种方法都有其优点，也有使用限制，可以根据需要选取合适的方式。'
 licensed: true
 draft: false
 ---

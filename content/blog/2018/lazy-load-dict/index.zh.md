@@ -125,5 +125,5 @@ print(lazy3['first'])
 print(lazy3['second'])
 ```
 
-上面这个对象不能直接修改内容，因此可以保护内容完整性。如果希望允许修改，可以把 `Mapping` 改为
+上面这个对象不能直接修改内容，因此可以保护内容完整性。如果希望允许修改，可以把 `Mapping` 换成
 [`MutableMapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping)。
