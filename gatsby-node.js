@@ -9,6 +9,9 @@ const {
   addPost,
 } = require(`./src/utils/gatsby-node-helpers`)
 
+const activeEnv =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || `development`
+
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions
 
@@ -52,7 +55,9 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(`
     {
       allMarkdownRemark(
-        filter: { frontmatter: { draft: { ne: true } } }
+        filter: { frontmatter: { ${
+          activeEnv === `development` ? `` : `draft: { ne: true }`
+        } } }
         sort: { fields: [frontmatter___date], order: DESC }
         limit: 10000
       ) {
