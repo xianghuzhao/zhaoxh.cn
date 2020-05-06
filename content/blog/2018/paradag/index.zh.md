@@ -128,14 +128,14 @@ class CustomExecutor:
     def execute(self, param):
         print('Executing:', param)
 
-    def report_start(self, vertice):
-        print('Start to run:', vertice)
+    def report_start(self, vertices):
+        print('Start to run:', vertices)
 
-    def report_running(self, vertice):
-        print('Current running:', vertice)
+    def report_running(self, vertices):
+        print('Current running:', vertices)
 
-    def report_finish(self, vertice_result):
-        for vertex, result in vertice_result:
+    def report_finish(self, vertices_result):
+        for vertex, result in vertices_result:
             print('Finished running {0} with result: {1}'.format(vertex, result))
 
 dag_run(dag, processor=MultiThreadProcessor(), executor=CustomExecutor())
@@ -157,8 +157,8 @@ class CustomExecutor:
     def execute(self, param):
         return param + 1
 
-    def report_finish(self, vertice_result):
-        for vertex, result in vertice_result:
+    def report_finish(self, vertices_result):
+        for vertex, result in vertices_result:
             print('Vertex {0} finished, level: {1}'.format(vertex, result))
 
     def deliver(self, vertex, result):
