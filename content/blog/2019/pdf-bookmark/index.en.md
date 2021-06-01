@@ -33,7 +33,7 @@ the description of bookmarks.
 `pdf-bookmark` must run under [Python3](https://www.python.org/).
 Install `pdf-bookmark` with `pip`:
 
-```console
+```shell-session
 $ pip install pdf-bookmark
 ```
 
@@ -50,7 +50,7 @@ running `pdf-bookmark`.
 `Ghostscript` is included in many Linux distributions. Take Arch Linux
 as an example:
 
-```console
+```shell-session
 $ sudo pacman -S ghostscript
 $ gs --version
 ```
@@ -99,7 +99,7 @@ configured with inline command.
 
 Import the bookmark and create a new pdf file:
 
-```console
+```shell-session
 $ pdf-bookmark -p input.pdf -b bookmark.bmk -o new-with-bookmark.pdf
 ```
 
@@ -159,7 +159,7 @@ Here are all supported inline commands:
 
 Export bookmarks:
 
-```console
+```shell-session
 $ pdf-bookmark -p input.pdf
 ```
 

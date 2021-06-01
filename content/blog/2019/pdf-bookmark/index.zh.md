@@ -26,7 +26,7 @@ PDF 文件里并不包含书签，这样就给跳转页面带来些麻烦。尤�
 
 然后在 `Python3` 环境下安装 `pdf-bookmark`：
 
-```console
+```shell-session
 $ pip install pdf-bookmark
 ```
 
@@ -40,7 +40,7 @@ $ pip install pdf-bookmark
 
 `Ghostscript` 很多 Linux 发行版都会提供，比如 Arch Linux：
 
-```console
+```shell-session
 $ sudo pacman -S ghostscript
 $ gs --version
 ```
@@ -79,7 +79,7 @@ Appendix................36
 
 然后就可以生成一个带有书签的 PDF 了：
 
-```console
+```shell-session
 $ pdf-bookmark -p input.pdf -b bookmark.bmk -o new-with-bookmark.pdf
 ```
 
@@ -125,7 +125,7 @@ Appendix................11
 
 导出书签需要预先安装 `pdftk` 命令，使用如下命令从现有的 PDF 文件中导出书签：
 
-```console
+```shell-session
 $ pdf-bookmark -p input.pdf
 ```
 
